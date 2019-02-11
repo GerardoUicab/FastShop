@@ -3,7 +3,7 @@
     <div class="container">
         <div class="row col-md-12"><br><br>
             <h1 class="heading-tittle" align="center">
-              listas  Categorias Padres
+                Categorias Padres
             </h1> 
             <button type="button" class="myButton" data-toggle="modal" data-target="#exampleModal">Agregar</button>
 
