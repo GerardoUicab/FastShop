@@ -123,11 +123,6 @@
         $agre->eliminar(asignar());
     }
 
-    if(isset($_REQUEST["btnSeleccionar"]))
-    {
-    
-
-    }
 
 ?>
 
@@ -135,8 +130,10 @@
 
 
 <script>
+<?php if(isset($_REQUEST["btnSeleccionar"])) {?>
 
     $('#exampleModal').modal('show');
-
-
+<?php }?>
+   
+    
 </script>

@@ -1,4 +1,16 @@
-<?php include 'headerAdmin.php' ?>
+<?php include 'headerAdmin.php';
+      include  '../DAO/CategoriaDAO.php';
+
+      $con=Conexion::conectar();
+      $eje="SELECT * FROM categoria";
+      $hola=$con->query($eje);
+      $lista=$hola->fetchAll(PDO::FETCH_ASSOC);
+     
+      $txtId=(isset($_POST['txtId']))?$_POST['txtId']:NULL;
+      $txtNombre=(isset($_POST['txtNombre']))?$_POST['txtNombre']:"";
+      $optSele=(isset($_POST['optSele']))?$_POST['optSele']:"";
+
+?>
 
     <div class="container">
         <div class="row col-md-12"><br><br>
@@ -32,32 +44,24 @@
                                             <div class="form-row">
                                             <div class="form-group">
                                         
-                                        <input type="hidden" class="form-control" id="txtId">
+                                        <input type="hidden" class="form-control" name="txtId">
                                         </div>
                                         <div class="form-group">
                                         <label for="usr">Séleccione la categoria padre:</label>
-                                            <select name="Categorias" style="width:560px; height:40px;" class="caja">
-                                          
-                                            <option>Seleccione</option>
-
-                                            <option>Avión</option>
-
-                                            <option>Tren</option>
-                                            <option>Seleccione</option>
-
-                                            <option>Avión</option>
-
-                                            <option>Tren</option>
+                                            <select name="Categorias" style="width:560px; height:40px;"  class="caja">
+                                          <?php foreach ($lista as $cate) { ?>
+                                            <option id="optsele" name="optSele" value="<?php echo $cate['id_Categoria'] ?>" ><?php echo $cate['NombreCategoria'] ?></option>
+                                          <?php }?>
                                             </select>
                                     
                                         
                                             <label for="usr">Nombre de categoria:</label>
-                                            <input type="text" class="form-control" id="usr">
+                                            <input type="text" class="form-control" name="txtCate">
                                             </div>
                                         </div>
                                         </div>
                                         <div class="modal-footer" >
-                                            <button type="button" height="48" class="myButton" data-dismiss="modal">Agregar</button>
+                                            <button type="submit" height="48" class="myButton" name="btnAgregar">Agregar</button>
                                             <button type="button" class="myButton">Modificar</button>
                                             <button type="button" class="myButton">Eliminar</button>
                                         </div>
@@ -101,7 +105,29 @@
 
             <!--Aqui empieza el modal para hacer CRUD de las categorias-->
     </div>
+<?php
 
+$objcate=new CategoriaDAO();
+    
 
+function asignar()
+{
+    $categoria=new CategoriaBO();
+    
+    $categoria->setId($_REQUEST["txtId"]);
+    $categoria->setNombre($_REQUEST["txtCate"]);
+    $categoria->setId_sub($_REQUEST["Categorias"]);
+    return $categoria;
+
+}
+
+if(isset($_REQUEST["btnAgregar"]))
+{
+    $objcate->insertar(asignar());
+    
+
+}
+
+?>
 
 <?php include 'footerAdmin.php' ?>

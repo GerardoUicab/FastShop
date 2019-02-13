@@ -22,7 +22,7 @@ class PaisDAO
         }
         else
         {   
-            print '<script languaje="JavaScript">alert("Guardado!");</script>';
+            print '<div class="alert alert-danger">Guardado con exito</div>';
         }
         $con=null;
 
