@@ -5,6 +5,7 @@
     class UsuarioDAO
     {
 
+        
         public function UsuarioDAO()
         {
 
@@ -17,12 +18,12 @@
             $email=$objusu->getEmail();
             $contraseña=$objusu->getContraseña();
             $idTipoUsu=$objusu->getIdTipoUsu();
-            $comando="insert into usuario (id_TipoUsu,Nombre,Contraseña,Email) values ($idTipoUsu,'$nombre','$contraseña','$email')";
-            $prueba=$con->query($comando);
+            $comando="insert into usuario (id_TipoUsu,Nombre,Contrasenia,Email) values ('$idTipoUsu','$nombre','$contraseña','$email')";
+            
 
-            if($prueba==0)
+            if(!$con->query($comando))
             {
-                print 'error al insertar';
+                print 'error al insertar'.$comando;
             }
             else
             {
@@ -31,6 +32,13 @@
 
             $con=null;
 
+        }
+
+        public function mostrar()
+        {
+            $con=Conexion::conectar();
+            $comando="select * from usuario";
+            $con->execute($comando);
         }
 
 

@@ -1,14 +1,9 @@
 <?php
  include '../DAO/UsuarioDAO.php';
-$conex=Conexion::conectar();
+$conex=Conexion::conectar();  
 $cmd="SELECT * FROM tipousuario WHERE id_TipoUsu!=1";
 $lis=$conex->query($cmd);
-$lista=$lis->fetchAll(PDO::FETCH_ASSOC);
-
-        $txtId=(isset($_POST['txtId']))?$_POST['txtId']:NULL;
-      $txtNombre=(isset($_POST['txtNombre']))?$_POST['txtNombre']:"";
-      $optSele=(isset($_POST['optSele']))?$_POST['optSele']:"";
-
+$lista=$lis->fetchAll(PDO::FETCH_ASSOC); 
 $objUsu=new UsuarioDAO();
     
 
@@ -27,8 +22,6 @@ function asignar()
 if(isset($_REQUEST["btnAceptar"]))
 {
     $objUsu->insertar(asignar());
-    
-
 }
 
 
@@ -111,9 +104,9 @@ if(isset($_REQUEST["btnAceptar"]))
                             <!-- TABS CONTENT LOGIN -->
                     		<div id="login-tab-content" class="active">
                     			<form class="login-form" action="" method="post">
-                    				<input type="text" class="input" id="user_login" autocomplete="off" placeholder="Correo">
-                    				<input type="password" class="input" id="user_pass" autocomplete="off" placeholder="Contraseña">
-                    				<input type="submit" class="button" value="Iniciar">
+                    				<input type="text" name="correo" class="input" id="user_login" autocomplete="off" placeholder="Correo">
+                    				<input type="password" name="contraseña" class="input" id="user_pass" autocomplete="off" placeholder="Contraseña">
+                    				<input type="submit" name="btnlogin" class="btn btn-success">
                     			</form>
                     			<div class="">
                     				<a class="" href="indexCli.php">Regresar al Incio</a>
@@ -121,7 +114,7 @@ if(isset($_REQUEST["btnAceptar"]))
                     		</div>
                             <!-- TABS CONTENT SIGNUP -->
                     		<div id="signup-tab-content">
-                    			<form class="signup-form" enctype="multipart/form-data" action="" method="post">
+                    			<form class="signup-form" enctype="multipart/form-data" action="" method="POST">
                                 <select name="TipoUsu" class="input" style="width:295px; height:40px;" class="caja">
                                 <?php foreach ($lista as $tipo) {?>
                                     <option id="optsele" name="optSele" value="<?php echo $tipo['id_TipoUsu'] ?>"><?php echo $tipo['Nombre'] ?></option>
@@ -139,7 +132,6 @@ if(isset($_REQUEST["btnAceptar"]))
                 </div>
             </div>
         </div>
-
 <script src='//production-assets.codepen.io/assets/common/stopExecutionOnTimeout-b2a7b3fe212eaa732349046d8416e00a9dec26eb7fd347590fbced3ab38af52e.js'></script><script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
 <script >/* LOGIN - MAIN.JS - dp 2017 */
 
