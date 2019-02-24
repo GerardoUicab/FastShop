@@ -1,4 +1,10 @@
-<?php include 'headerAdmin.php'?><br>
+<?php include 'headerAdmin.php';
+        include '../DAO/EstadoDAO.php';
+        $conex=Conexion::conectar();
+        $objPais="select * from pais";
+        $consulta=$conex->query($objPais);
+        $lisP=$consulta->fetchAll(PDO::FETCH_ASSOC);
+?><br>
     <body>
             <div class="container">
             <h1 class="heading-tittle" align="center">
@@ -29,22 +35,13 @@
                                             <div class="form-row">
                                             <div class="form-group">
                                         
-                                        <input type="hidden" class="form-control" id="txtId">
                                         </div>
                                         <div class="form-group">
                                         <label for="usr">Séleccione País:</label>
                                             <select name="Categorias" style="width:560px; height:40px;" class="caja">
-                                          
-                                            <option>Seleccione</option>
-
-                                            <option>México</option>
-
-                                            <option>Argemtina</option>
-                                            <option>Uruguay</option>
-
-                                            <option>Colombia</option>
-
-                                            <option>Canada</option>
+                                            <?php foreach ($lisP as $Pais) {?>
+                                            <option value="<?php echo $Pais['id_Pais'] ?>"><?php echo $Pais['NombrePais']?></option>
+                                            <?php }?>
                                             </select>
                                     
                                         

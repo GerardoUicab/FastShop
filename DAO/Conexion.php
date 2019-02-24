@@ -6,6 +6,7 @@
          try{
              /*conecta a la base de datos */
              $conex=new PDO("mysql:host=localhost; dbname=fastshop","root","");
+             $conex->exec("set names utf8");
              return $conex;
              
 
