@@ -30,8 +30,40 @@ class EstadoDAO
 
     public function Modificar($objEstado)
     {
+        $conex=Conexion::conectar();
+        $idEstado=$objEstado->getId();
+        $nombreEstado=$objEstado->getNombre();
+        $idPais=$objEstado->getIdPais();
+        $cmd="update estado set NombreEstado=$nombreEstado, id_Pais=$idPais where id_Estado=$idEstado";
+
+        if(!$conex->query($cmd))
+        {
+            print '<script languaje="JavaScript">alert("Error al Modificar!");</script>';
+
+        }
+        else
+        {
+            print '<script languaje="JavaScript">alert("Modificado con exito!");</script>';
+        }
+        $conex=null;
         
 
+    }
+
+    public function Eliminar($objEstado)
+    {
+        $conex=Conexion::conectar();
+        $idEstado=$objEstado->getId();
+        $cmd="delete from estado where id_Estado=$idEstado";
+
+        if(!$conex->query($cmd))
+        {
+            print '<script languaje="JavaScript">alert("Error al Eliminar!");</script>';
+        }
+        else
+        {
+            print '<script languaje="JavaScript">alert("Eliminado con exito!");</script>';
+        }
     }
 
 }

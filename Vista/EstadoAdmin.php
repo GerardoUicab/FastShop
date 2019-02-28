@@ -4,6 +4,14 @@
         $objPais="select * from pais";
         $consulta=$conex->query($objPais);
         $lisP=$consulta->fetchAll(PDO::FETCH_ASSOC);
+
+        $consultaEstado="select e.id_Estado, e.NombreEstado,e.id_Pais, p.NombrePais from estado e, pais p where e.id_Pais=p.id_Pais";
+        $ejecutarEstado=$conex->query($consultaEstado);
+        $estado=$ejecutarEstado->fetchAll(PDO::FETCH_ASSOC);
+
+        $txtIdEstado=(isset($_POST['txtIdEstado']))?$_POST['txtIdEstado']:"";
+        $txtEstado=(isset($_POST['txtEstado']))?$_POST['txtEstado']:"";
+        $txtIdpais=(isset($_POST['Categorias']))?$_POST['Categorias']:"";
 ?><br>
     <body>
             <div class="container">
@@ -40,21 +48,21 @@
                                         <label for="usr">Séleccione País:</label>
                                             <select name="Categorias" style="width:560px; height:40px;" class="caja">
                                             <?php foreach ($lisP as $Pais) {?>
-                                            <option value="<?php echo $Pais['id_Pais'] ?>"><?php echo $Pais['NombrePais']?></option>
+                                            <option  value="<?php echo $Pais['id_Pais'] ?>"><?php echo $Pais['NombrePais']?></option>
                                             <?php }?>
                                             </select>
                                     
                                         
                                             <label for="usr">Nombre del Estado:</label>
-                                            <input type="hidden" class="form-control" id="txtIdEstado">
-                                            <input type="text" class="form-control" id="txtEstado">
+                                            <input type="hidden" class="form-control" name="txtIdEstado" value="<?php echo $txtIdEstado ?>" id="txtIdEstado">
+                                            <input type="text" class="form-control" id="txtEstado" value="<?php echo $txtEstado?>" name="txtEstado">
                                             </div>
                                         </div>
                                         </div>
                                         <div class="modal-footer" >
-                                            <button type="button" height="48" class="myButton" data-dismiss="modal">Agregar</button>
-                                            <button type="button" class="myButton">Modificar</button>
-                                            <button type="button" class="myButton">Eliminar</button>
+                                            <button type="submit" height="48" name="btnAgregar" class="myButton">Agregar</button>
+                                            <button type="submit" class="myButton">Modificar</button>
+                                            <button type="submit" class="myButton">Eliminar</button>
                                         </div>
                                     </div>
                                  </div>
@@ -74,18 +82,27 @@
     			    </tr>
                 </thead>
   			        <tbody>
+                      <?php foreach ($estado as $lisEstado) {?>
     			         <tr>
-                            <td hidden="true">1</td>
-                                <td>Yucatan</td>
-                                <td hidden="true">2</td>
-                                <td>México</td>
+                        
+                            <td hidden="true"><?php echo $lisEstado ['id_Estado'] ?></td>
+                                <td><?php echo $lisEstado ['NombreEstado'] ?></td>
+                                <td hidden="true"><?php echo $lisEstado ['id_Pais'] ?></td>
+                                <td><?php echo $lisEstado ['NombrePais'] ?></td>
 
                           
-                                <td>
-                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-pencil-square-o"></i></button>
-                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-times"></i></button>
-                                </td>
+                        <td>
+                          <form method="post" action="">
+                          <input type="hidden" name="Categorias" value="<?php echo $lisEstado['id_Pais']; ?>">
+                          <input type="hidden" name="txtIdEstado" value="<?php echo $lisEstado['id_Estado']; ?>">
+                          <input type="hidden" name="txtEstado" value="<?php echo $lisEstado['NombreEstado']; ?>">
+                          <button type="submit" class="btn btn-primary"  name="btnSeleccionar"><i class="fa fa-pencil-square-o"></i></button>
+                          <button type="submit" class="btn btn-primary" name="btnEliminar"><i class="fa fa-times"></i></button>
+                          </form>
+                        </td>
+                         
                         </tr>
+                        <?php }?>
 			            </tbody>
 			</table>
 
@@ -98,4 +115,34 @@
             </div>
 
     </body>
+    <?php
+     $cmd= new EstadoDAO();
+
+     function asignar()
+    {
+        $Estado=new EstadoBO();
+        $Estado->setId($_REQUEST["txtIdEstado"]);
+        $Estado->setIdPais($_REQUEST["Categorias"]);
+        $Estado->setNombre($_REQUEST["txtEstado"]);
+        return $Estado;
+
+    }
+
+    if(isset($_REQUEST["btnAgregar"]))
+    {
+        $cmd->insertar(asignar());
+
+    }
+
+ ?>
 <?php include 'footerAdmin.php' ?>
+<script>
+<?php if(isset($_REQUEST["btnSeleccionar"])) {?>
+ 
+
+    $('#ModalEstado').modal('show');
+    
+<?php }?>
+   
+    
+</script>
