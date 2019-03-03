@@ -1,12 +1,13 @@
 <?php 
+
   class Conexion
  {
      public function conectar()
      {
          try{
              /*conecta a la base de datos */
-             $conex=new mysqli('localhost','root','','fastshop');
-             //$conex->exec("set names utf8");
+             $conex=new PDO("mysql:host=localhost; dbname=fastshop","root","");
+             $conex->exec("set names utf8");
              return $conex;
              
 

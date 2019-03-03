@@ -6,7 +6,7 @@ class usuarioBO
     private $nombre;
     private $email;
     private $contraseña;
-		private $idTipoUsu;
+		private $idTipoUsu=2;
 		
 		public function usuarioBO()
 		{

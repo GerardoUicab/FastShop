@@ -1,6 +1,5 @@
 <?php
     include '../BO/usuarioBO.php';
-    include 'Conexion.php';
 
     class UsuarioDAO
     {
@@ -18,28 +17,23 @@
             $email=$objusu->getEmail();
             $contraseña=$objusu->getContraseña();
             $idTipoUsu=$objusu->getIdTipoUsu();
-            $comando="insert into usuario (id_TipoUsu,Nombre,Contrasenia,Email) values ('$idTipoUsu','$nombre','$contraseña','$email')";
+            $comando=("insert into usuario (id_TipoUsu,Nombre,Contrasenia,Email) values ('$idTipoUsu','$nombre','$contraseña','$email')");
             
-
+            
             if(!$con->query($comando))
             {
-                print 'error al insertar'.$comando;
+                print 'error al insertar';
             }
             else
             {
-                print '<div class="alert alert-danger">Guardado con exito</div>';
+                print '<script languaje="JavaScript">alert("se creo la cuenta");</script>';
+                
             }
 
             $con=null;
 
         }
 
-        public function mostrar()
-        {
-            $con=Conexion::conectar();
-            $comando="select * from usuario";
-            $con->execute($comando);
-        }
 
 
 

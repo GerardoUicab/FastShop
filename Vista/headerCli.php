@@ -1,7 +1,9 @@
 <?php 
 include '../DAO/Conexion.php';
-$Conex=Conexion::conectar();
-$categoria=$Conex->query("SELECT id_Categoria,NombreCategoria FROM categoria WHERE id_SubCate is NULL");
+$conex=Conexion::conectar();
+$categoria="SELECT id_Categoria,NombreCategoria FROM categoria WHERE id_SubCate is NULL";
+$lis=$conex->query($categoria);
+$lista=$lis->fetchall();
 ?>
 
 
@@ -104,8 +106,8 @@ $categoria=$Conex->query("SELECT id_Categoria,NombreCategoria FROM categoria WHE
 										Categorias
 									</a>
 									<div class="dropdown-menu">
-									<?php  while($user=mysqli_fetch_array($categoria)){ ?>
-										<a class="dropdown-item" id="<?php echo $user['id_Categoria']; ?>"  href="product.html"><?php echo $user['NombreCategoria']; ?></a>
+									<?php  foreach($lista as $recorer){ ?>
+										<a class="dropdown-item" id="<?php echo $recorer['id_Categoria']; ?>"  href="product.html"><?php echo $recorer['NombreCategoria']; ?></a>
 										<?php } ?>
 									</div>
 								</li>
