@@ -4,7 +4,7 @@
  $con=Conexion::conectar();
  $eje="SELECT * FROM pais";
  $hola=$con->query($eje);
- $lista=$hola->fetchAll(PDO::FETCH_ASSOC);
+ $lista=$hola->fetchAll();
 
  $txtId=(isset($_POST['txtId']))?$_POST['txtId']:"";
  $txtNombre=(isset($_POST['txtNombre']))?$_POST['txtNombre']:"";

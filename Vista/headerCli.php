@@ -1,6 +1,7 @@
 <?php 
-$con=new mysqli('localhost','root','','empresa');
-$datos=$con->query("SELECT * FROM categoria");
+include '../DAO/Conexion.php';
+$Conex=Conexion::conectar();
+$categoria=$Conex->query("SELECT id_Categoria,NombreCategoria FROM categoria WHERE id_SubCate is NULL");
 ?>
 
 
@@ -48,12 +49,14 @@ $datos=$con->query("SELECT * FROM categoria");
 		<div class="container">
 			<div class="row header-bot_inner_wthreeinfo_header_mid">
 				<!-- logo -->
-				<div class="col-md-3 logo_agile">
+				<div class="col-md-3  logo_agile">
 					<h1 class="text-center">
-						<a href="index.html" class="font-weight-bold font-italic">
-							<img src="../Recursos/images/logo2.png" alt=" " class="img-fluid">Fast Shop
+						<a href="indexCli.php" class="font-weight-bold font-italic">
+					
+							<img src="../Recursos/images/FastShop.png"  style="width:45%; padding-top:15px; right " class="img-fluid">Fast Shop
 						</a>
 					</h1>
+					
 				</div>
 				<!-- //logo -->
 				<!-- header-bot -->
@@ -90,29 +93,25 @@ $datos=$con->query("SELECT * FROM categoria");
 			<nav class="navbar navbar-expand-lg navbar-light bg-light" >
 				<!--aqui termina-->
 				<div class="collapse navbar-collapse text-center" id="navbarSupportedContent">
-					<ul class="navbar-nav ml-auto text-center col-lg-10">
+					<ul class="navbar-nav ml-auto text-center col-md-12">
 								<li class="nav-item active mr-lg-2 mb-lg-0 mb-2">
-							<a class="nav-link text-white" href="index.html">&nbsp; 
-								<img src="../Recursos/images/home-icon-silhouette.png" width="40px" height="30px"><br>&nbsp; Inicio
+							<a class="nav-link text-white" href="indexCli.php">Inicio
 								<span class="sr-only">(current)</span>
 							</a>
 						</li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;
 							<li class="nav-item dropdown mr-lg-2 mb-lg-0 mb-2">
 									<a class="nav-link dropdown-toggle text-white" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-										<img src="../Recursos/images/categoria.png" width="40px" height="30px"><br>
 										Categorias
 									</a>
 									<div class="dropdown-menu">
-									<?php  while($user=mysqli_fetch_array($datos)){ ?>
-										<a class="dropdown-item" id="<?php echo $user['ID']; ?>"  href="product.html"><?php echo $user['Nombre']; ?></a>
+									<?php  while($user=mysqli_fetch_array($categoria)){ ?>
+										<a class="dropdown-item" id="<?php echo $user['id_Categoria']; ?>"  href="product.html"><?php echo $user['NombreCategoria']; ?></a>
 										<?php } ?>
-										<a class="dropdown-item" href="../Recursos/Carrito.php">Carrito</a>
 									</div>
 								</li>
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;
 						<li class="nav-item dropdown mr-lg-2 mb-lg-0 mb-2">
-							<a class="nav-link dropdown-toggle text-white" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-							<img src="../Recursos/images/conversation.png" width="40px" height="30px"><br>&nbsp;	Información
+							<a class="nav-link dropdown-toggle text-white" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Información
 							</a>
 							<div class="dropdown-menu">
 								<div class="agile_inner_drop_nav_info p-4">
@@ -143,11 +142,20 @@ $datos=$con->query("SELECT * FROM categoria");
 						</li>
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;
 						<li class="nav-item mr-lg-2 mb-lg-0 mb-2">
-							<a class="nav-link text-white" href="product.html"><img src="../Recursos/images/pedido.png" width="50px" height="30px"><br>&nbsp; Pedidos</a>
+							<a class="nav-link text-white" href="product.html"> Pedidos</a>
 						</li>
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;
 						<li class="nav-item mr-lg-2 mb-lg-0 mb-2">
-						<a class="nav-link text-white" href="Login.php"><img src="../Recursos/images/usuario.png" width="40px" height="30px"><br> &nbsp;Iniciar Sesión</a>
+						<a class="nav-link text-white" href="Login.php">Vender</a>
+						</li>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;
+						<li class="nav-item mr-lg-2 mb-lg-0 mb-2">
+						<a class="nav-link text-white" href="Login.php">Mis Productos</a>
+						</li>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;
+						<li class="nav-item mr-lg-2 mb-lg-0 mb-2 text-left">
+						<a class="nav-link text-white" href="Login.php">Iniciar / crear cuenta</a>
+						
 						</li>
 						
 					</ul>

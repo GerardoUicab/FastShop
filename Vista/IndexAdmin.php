@@ -8,11 +8,11 @@
 			<div class="agile_top_w4_grids">
 				<ul class="ca-menu">
 					<li>
-						<a href="#">
+						<a href="UsuarioVendedorAdmin.php">
 										
 							<i class="fa fa-user" aria-hidden="true"></i>
 								<div class="ca-content">
-									<h4 class="ca-main">Usuarios Vendedores</h4>
+									<h4 class="ca-main">Vendedores</h4>
 										<h3 class="ca-sub two">Ver Lista</h3>
 								</div>
 						</a>
@@ -80,11 +80,11 @@
 			<div class="agile_top_w4_grids">
 				<ul class="ca-menu">
 					<li>
-						<a href="#">
+						<a href="UsuarioCompradorAdmin.php">
 										
 							<i class="fa fa-user" aria-hidden="true"></i>
 								<div class="ca-content">
-									<h4 class="ca-main">Usuarios Compradores</h4>
+									<h4 class="ca-main">Compradores</h4>
 										<h3 class="ca-sub two">Ver Lista</h3>
 								</div>
 						</a>
@@ -102,7 +102,7 @@
 										
 							<i class="fa fa-user" aria-hidden="true"></i>
 								<div class="ca-content">
-									<h4 class="ca-main">Usuarios Administradores</h4>
+									<h4 class="ca-main">Administradores</h4>
 										<h3 class="ca-sub two">Ver Lista</h3>
 								</div>
 						</a>
@@ -134,7 +134,7 @@
 			<div class="agile_top_w4_grids">
 				<ul class="ca-menu">
 					<li>
-						<a href="#">
+						<a href="">
 										
 							<i class="fa fa-user" aria-hidden="true"></i>
 								<div class="ca-content">
