@@ -171,5 +171,4 @@
 			</table>
 	</div>
 </div>
-
 <?php include 'footerAdmin.php'?>

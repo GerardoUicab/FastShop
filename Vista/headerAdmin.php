@@ -1,4 +1,6 @@
 
+<?php session_start(); ?>
+
 <!DOCTYPE html>
 <html lang="zxx">
 <head>
@@ -40,12 +42,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							<ul class="gn-menu agile_menu_drop">
 								<li><a href="indexAdmin.php"> <i class="fa fa-home"></i>Inicio</a></li>
 								<li>
-									<a><i class="fa fa-user" aria-hidden="true"></i>Gestión Usuarios</a>
-									<ul class="gn-submenu">
-										<li class="mini_list_w3"><a href="input.html"><i class="fa fa-user"></i>Comprador</a></li>
-										<li class="mini_list_w3"><a href="validation.html"><i class="fa fa-user"></i>Vendedor</a></li>
-										<li class="mini_list_w3"><a href="validation.html"><i class="fa fa-user"></i>Administrador</a></li>
-									</ul> 
+									<a href="UsuariosAdmin.php"><i class="fa fa-user" aria-hidden="true"></i>Gestión Usuarios</a>
 								</li>
 								<li>
 									<a> <i class="fa fa-flag" aria-hidden="true"></i>Gestión Lugar <i class="fa fa-angle-down" aria-hidden="true"></i></a> 
@@ -70,6 +67,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 										<li class="mini_list_w3"><a href="SubCategoriaAdmin.php"><i class="fa fa-align-justify"></i>SubCategoria</a></li>
 									</ul>
 								</li>
+								<li>
+									<a > <i class="fa fa-align-justify" aria-hidden="true"></i>Gestion Frontend<i class="fa fa-angle-down" aria-hidden="true"></i></a> 
+									<ul class="gn-submenu">
+										<li class="mini_list_w3"><a href="CarruselAdmin.php"><i class="fa fa-align-justify"></i>Carrusel</a></li>
+										<li class="mini_list_w3"><a href="MarcasAdmin.php"><i class="fa fa-align-justify"></i>Marcas</a></li>
+									</ul>
+								</li>
 								
 							</ul>
 						</div><!-- /gn-scroller -->
@@ -88,7 +92,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 										<ul class="dropdown-menu drp-mnu">
 										<li> <a href="#"><i class="fa fa-user"></i>Editar Perfil</a> </li> 
 										<li> <a href="#"><i class="fa fa-camera"></i>Editar Foto</a> </li> 
-										<li> <a href="#"><i class="fa fa-times"></i>Cerrar Sesión</a> </li>
+										<li> <a href="CerrarSession.php"><i class="fa fa-times"></i>Cerrar Sesión</a> </li>
 										</ul>
 									</li>
 									
@@ -272,3 +276,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 </head><br><br><br><br>
 
 <!-- banner -->
+<script>
+ <?php if(isset($_SESSION["id_TipoUsu"])==false || $_SESSION["id_TipoUsu"]!=1){?>
+    window.location.replace("Login.php");
+ <?php } ?>
+</script>

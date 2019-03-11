@@ -4,7 +4,9 @@ class usuarioBO
 {
     private $id;
     private $nombre;
-    private $email;
+		private $email;
+		private $apellido;
+		private $foto;
     private $contraseña;
 		private $idTipoUsu=2;
 		
@@ -51,6 +53,20 @@ class usuarioBO
 	
 		public function setIdTipoUsu($idTipoUsu){
 			$this->idTipoUsu = $idTipoUsu;
+		}
+		public function getFoto(){
+			return $this->foto;
+		}
+	
+		public function setFoto($foto){
+			$this->foto = $foto;
+		}
+		public function getApellido(){
+			return $this->id;
+		}
+	
+		public function setApellido($apellido){
+			$this->apellido = $apellido;
 		}
 }
 ?>

@@ -17,7 +17,7 @@ include '../DAO/UsuarioDAO.php';
                 <div style="display: none;" id="login-alert" class="alert alert-danger col-md-12"></div>
                 <form method="post" value="" role="form">
 				<div style="margin-bottom: 25px;" class="input-group">
-                        <img src="../Recursos/images/FastShop.png" style="width:50%; height:40%; margin:1px auto;">
+                        <img src="../Recursos/images/FastShop.png" style="width:40%; height:30%; margin:1px auto;">
                     </div> 
                     <div style="margin-bottom: 25px;" class="input-group"> 
                     <div class="col-md-12 controls">

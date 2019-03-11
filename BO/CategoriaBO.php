@@ -4,7 +4,8 @@ class CategoriaBO
 {
     public $id;
     public $nombre;
-    public $id_sub=null;
+    public $id_sub;
+    private $fotoCategoria;
 
 
     public function CategoriaBO()
@@ -39,6 +40,14 @@ class CategoriaBO
         $this->id_sub=$valor;
     }
 
-    
+    public function getFotoCategoria()
+    {
+        return $this->fotoCategoria;
+    }
+
+    public function setFotoCategoria($valor)
+    {
+        $this->fotoCategoria=$valor;
+    }
 }
 ?>

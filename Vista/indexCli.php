@@ -1,10 +1,11 @@
-	<!--final de header-->
-<?php
+<?php 
  include 'headerCli.php';
- $con=new mysqli('localhost','root','','empresa');
- $datos=$con->query("SELECT * FROM producto");
+ $conex=Conexion::conectar();
+	$sel="SELECT * FROM carrusel";
+	$lis=$conex->prepare($sel);
+	$lis->execute();
+	$baner=$lis->fetchAll();
  ?>
-	<!--carrosel1-->
 	<div class="footer-top-first">
 			<div class="container py-md-5 py-sm-4 py-3">
 				<!-- footer first section -->
@@ -16,8 +17,8 @@
 								<i class="fas fa-dolly"></i>
 							</div>
 							<div class="col-8 text-form-footer">
-								<h3>Free Shipping</h3>
-								<p>on orders over $100</p>
+								<h3>Compra rapida</h3>
+								<p>pedidos arriba de  $100</p>
 							</div>
 						</div>
 					</div>
@@ -27,8 +28,8 @@
 								<i class="fas fa-shipping-fast"></i>
 							</div>
 							<div class="col-8 text-form-footer">
-								<h3>Fast Delivery</h3>
-								<p>World Wide</p>
+								<h3>Rapido envío</h3>
+								<p>a todo el pais</p>
 							</div>
 						</div>
 					</div>
@@ -38,8 +39,8 @@
 								<i class="far fa-thumbs-up"></i>
 							</div>
 							<div class="col-8 text-form-footer">
-								<h3>Big Choice</h3>
-								<p>of Products</p>
+								<h3>Gran eleccion</h3>
+								<p>de productos</p>
 							</div>
 						</div>
 					</div>
@@ -52,14 +53,12 @@
 	=======================================-->
 	<section id="slider" class="container">
 		<ul class="slider-wrapper">
+		<?php foreach ($baner as $lista1) { ?>
 		<li class="current-slide">
-			<img src="http://i9.photobucket.com/albums/a88/creaticode/1_zpsc6871490.jpg" width="100%" height="2px"!important title="" alt="">
-
-			<div class="caption">
-				<h2 class="slider-title">Diseño web</h2>
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Labore, placeat est. Alias illo hic quo nobis, aspernatur iste ut voluptate.</p>
-			</div>
+			<img src="../Recursos/images/<?php echo $lista1['NombreFoto']?>" width="100%" height="20%">
+			
 		</li>
+		<?php }?>
 		</ul>
 		<!-- Sombras -->
 		<div class="slider-shadow"></div>
@@ -93,7 +92,7 @@
 											<img src="../Recursos/images/m1.jpg" alt="">
 											<div class="men-cart-pro">
 												<div class="inner-men-cart-pro">
-													<a href="single.html" class="link-product-add-cart">Quick View</a>
+													<a href="single.html" class="link-product-add-cart">Ver detalle</a>
 												</div>
 											</div>
 										</div>
@@ -116,7 +115,7 @@
 														<input type="hidden" name="currency_code" value="USD" />
 														<input type="hidden" name="return" value=" " />
 														<input type="hidden" name="cancel_return" value=" " />
-														<input type="submit" name="submit" value="Agregar al Carrito" class="button btn" />
+														<input type="submit" name="submit"  class="button btn" />
 													</fieldset>
 												</form>
 											</div>

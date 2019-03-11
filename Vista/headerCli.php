@@ -1,11 +1,24 @@
 <?php 
 include '../DAO/Conexion.php';
+session_start();
 $conex=Conexion::conectar();
 $categoria="SELECT id_Categoria,NombreCategoria FROM categoria WHERE id_SubCate is NULL";
-$lis=$conex->query($categoria);
+$lis=$conex->prepare($categoria);
+$lis->execute();
 $lista=$lis->fetchall();
-?>
+$marcas="SELECT id_Marca,NombreMarca FROM marca";
+	$lisMarca=$conex->prepare($marcas);
+	$lisMarca->execute();
+	$listaMarca=$lisMarca->fetchAll();
 
+?>
+<script>
+	<?php if(isset($_SESSION["id_TipoUsu"])==true && $_SESSION["id_TipoUsu"]!=2){ ?>
+    
+		window.location.replace("indexAdmin.php");
+
+<?php }?>
+</script>
 
 <!DOCTYPE html>
 <html lang="zxx">
@@ -113,50 +126,56 @@ $lista=$lis->fetchall();
 								</li>
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;
 						<li class="nav-item dropdown mr-lg-2 mb-lg-0 mb-2">
-							<a class="nav-link dropdown-toggle text-white" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Información
-							</a>
-							<div class="dropdown-menu">
-								<div class="agile_inner_drop_nav_info p-4">
-									<h5 class="mb-3">¿En que te podemos ayudar?</h5>
-									<div class="row">
-										<div class="col-sm-6 multi-gd-img">
-											<ul class="multi-column-dropdown">
-												<li>
-													<a href="#">Acerca de</a>
-												</li>
-												<li>
-													<a href="#">Contactanos</a>
-												</li>
-												<li>
-													<a href="#">¿Quienes somos?</a>
-												</li>
-												<li>
-													<a href="#">Servicios</a>
-												</li>
-												<li>
-													<a href="#">Ubicación</a>
-												</li>
-											</ul>
-										</div>
+									<a class="nav-link dropdown-toggle text-white" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+										Marcas
+									</a>
+									<div class="dropdown-menu">
+									<?php  foreach($listaMarca as $recorrer){ ?>
+										<a class="dropdown-item" id="<?php echo $recorrer['id_Marca']; ?>"  href="product.html"><?php echo $recorrer['NombreMarca']; ?></a>
+										<?php } ?>
 									</div>
-								</div>
-							</div>
+								</li>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;
+						<li class="nav-item mr-lg-2 mb-lg-0 mb-2">
+							<a class="nav-link text-white" href="PedidosCli.php">Compras</a>
 						</li>
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;
 						<li class="nav-item mr-lg-2 mb-lg-0 mb-2">
-							<a class="nav-link text-white" href="product.html"> Pedidos</a>
+						<a class="nav-link text-white" href="Vender.php">Vender</a>
 						</li>
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;
 						<li class="nav-item mr-lg-2 mb-lg-0 mb-2">
-						<a class="nav-link text-white" href="Login.php">Vender</a>
-						</li>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;
-						<li class="nav-item mr-lg-2 mb-lg-0 mb-2">
-						<a class="nav-link text-white" href="Login.php">Mis Productos</a>
+						<a class="nav-link text-white" href="Vender.php">Favoritos</a>
 						</li>
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;
 						<li class="nav-item mr-lg-2 mb-lg-0 mb-2 text-left">
-						<a class="nav-link text-white" href="Login.php">Iniciar / crear cuenta</a>
+						<?php 
+							if(isset($_SESSION["Nombre"])>null)
+							{
+ 							if(isset($_SESSION["Nombre"]))  
+ 								{  
+									  echo '
+									  <li class="nav-item dropdown mr-lg-2 mb-lg-0 mb-2">
+									<a class="nav-link dropdown-toggle text-white" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+										Bienvenido: '.$_SESSION["Nombre"].'
+									</a>
+									<div class="dropdown-menu">
+									<a class="dropdown-item"  href="#"><img src="../Recursos/images/admin.jpg" style="width:50px; height:50px; margin:10px auto;" alt="..." class="img img-circle"></a>
+										<a class="dropdown-item"  href="product.html">'.$_SESSION['Nombre'].'</a>
+										<a  class="dropdown-item" href="CerrarSession.php"><div class="btn btn-primary">Cerrar Sesion</div></a>
+									</div>
+								</li>';						  
+								 }  
+									 else  
+ 										{  
+     									 header("location:Login.php");  
+										 }  
+							}
+							else
+							{
+								echo '<a class="nav-link text-white" href="Login.php">Iniciar / crear cuenta</a>';
+							}
+							 ?>
 						
 						</li>
 						

@@ -123,6 +123,8 @@
     if(isset($_REQUEST["btnAgregar"]))
     {
         $agre->insertar(obtener());
+        
+        
 
     }
     if(isset($_REQUEST["btnModificar"]))
@@ -133,14 +135,11 @@
     {
         $agre->eliminar(asignar());
     }
-    
-
-
 ?>
 
 <?php include 'footerAdmin.php'?>
 
-
+    
 <script>
 <?php if(isset($_REQUEST["btnSeleccionar"])) {?>
  

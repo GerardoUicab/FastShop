@@ -84,7 +84,7 @@ h1 {
 .slider-wrapper img {
 	position: absolute;
 	max-width: auto;
-	height: 265%;
+	height: 100%;
 	top: 0;
 	left: 0;
 }

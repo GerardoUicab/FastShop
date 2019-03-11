@@ -49,6 +49,7 @@
                                         <div class="form-group">
                                         <label for="usr">Séleccione la categoria padre:</label>
                                             <select name="Categorias" style="width:560px; height:40px;"  class="caja">
+                                            <option id="optsele" name="optSele" value="null" >Seleccione Categoria</option>
                                           <?php foreach ($lista as $cate) { ?>
                                             <option id="optsele" name="optSele" value="<?php echo $cate['id_Categoria'] ?>" ><?php echo $cate['NombreCategoria'] ?></option>
                                           <?php }?>
@@ -56,7 +57,9 @@
                                     
                                         
                                             <label for="usr">Nombre de categoria:</label>
-                                            <input type="text" class="form-control" name="txtCate">
+                                            <input type="text" class="form-control" required name="txtCate">
+                                            <label for="usr">Seleccione la imagen:</label>
+                                        <input type="file" accept="image/jpeg" class="form-control" id="txtFoto" required value="" name="txtFoto" placeholder="seleccione foto">
                                             </div>
                                         </div>
                                         </div>
@@ -78,9 +81,9 @@
   			<thead>
    				 <tr>
       				<th scope="col" width="10px" hidden="true">idSubCategoria</th>
-                     <th scope="col" width="400px">Nombre de subcategoria</th>
+                     <th scope="col" width="400px">Categoria Padre</th>
                      <th scope="col" width="10px" hidden="true">idCategoria</th>
-                     <th scope="col" width="400px">Nombre de categoria</th>
+                     <th scope="col" width="400px">Sub Categoria/th>
                      <th scope="col">Selecione opción</th>
     			</tr>
   			</thead>
@@ -117,6 +120,14 @@ function asignar()
     $categoria->setId($_REQUEST["txtId"]);
     $categoria->setNombre($_REQUEST["txtCate"]);
     $categoria->setId_sub($_REQUEST["Categorias"]);
+    $fecha= new DateTime();
+        $archivo=($_FILES["txtFoto"] !="")?$fecha->getTimestamp()."_".$_FILES["txtFoto"]["name"]:"usuario.png";
+        $tmpFoto=$_FILES["txtFoto"]["tmp_name"];
+        if($tmpFoto !="")
+        {
+            move_uploaded_file($tmpFoto,"../Recursos/images/".$archivo);
+        }
+        $categoria->setFotoCategoria($archivo);
     return $categoria;
 
 }
