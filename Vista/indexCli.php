@@ -1,10 +1,15 @@
 <?php 
  include 'headerCli.php';
+ include '../DAO/DetalleCarritoDAO.php';
  $conex=Conexion::conectar();
 	$sel="SELECT * FROM carrusel";
 	$lis=$conex->prepare($sel);
 	$lis->execute();
 	$baner=$lis->fetchAll();
+	$cmdProducto="select a.id_Articulo, a.NombreArt,a.FotoArt,a.costoEnvio,u.nombre,c.precio from articulo a,Combinacion c, Usuario u where a.id_Usuario=u.id_Usuario and c.id_Articulo=a.id_Articulo";
+	$lisArti=$conex->prepare($cmdProducto);
+	$lisArti->execute();
+	$listaArti=$lisArti->fetchAll();
  ?>
 	<div class="footer-top-first">
 			<div class="container py-md-5 py-sm-4 py-3">
@@ -85,40 +90,50 @@
 						<div class="product-sec1 px-sm-4 px-3 py-sm-5  py-3 mb-4">
 							<h3 class="heading-tittle text-center font-italic">Productos</h3>
 							<div class="row">
-							<?php while($user=mysqli_fetch_array($datos)){ ?>
+							<?php foreach($listaArti as $barritoAr){ ?>
 								<div class="col-md-4 product-men mt-5">
 									<div class="men-pro-item simpleCart_shelfItem">
 										<div class="men-thumb-item text-center">
-											<img src="../Recursos/images/m1.jpg" alt="">
+										
+										<h5 style="color:#004d73;">Publicado: <?php echo $barritoAr['nombre']?></h5>
+										
+										
+											<img src="../Recursos/images/<?php echo $barritoAr['FotoArt'] ?>" style="width:80%; height:30%;" alt="">
 											<div class="men-cart-pro">
 												<div class="inner-men-cart-pro">
-													<a href="single.html" class="link-product-add-cart">Ver detalle</a>
+													<a href="DetalleArticulo.php" class="link-product-add-cart">Ver detalle</a>
 												</div>
 											</div>
 										</div>
 										<div class="item-info-product text-center border-top mt-4">
-											<h4 class="pt-1">
-												<a href="single.html"><?php echo $user['NombreProduc'] ?></a>
-											</h4>
+											<h5 class="pt-1">
+												Nombre del producto:<h6><?php echo $barritoAr['NombreArt'] ?></h6>
+											</h5>
 											<div class="info-product-price my-2">
-												<span class="item_price">$<?php echo $user['Precio'] ?></span>
+												<h5>Precio: <h6><?php echo $barritoAr['precio']; ?></h6></h5>
 											</div>
+											<div class="info-product-price my-2">
+											<?php if($barritoAr['costoEnvio']!=0)
+											{
+												echo '<span class="item_price">Costo envio:$'. $barritoAr["costoEnvio"].'</span>';
+											 }
+											 else
+											 {
+												echo '<span class="item_price">Envio Gratis</span>';
+											 }?>
+											</div>
+											<form  method="post" value="" enctype="multipart/form-data">
 											<div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
-												<form action="#" method="post">
-													<fieldset>
-														<input type="hidden" name="cmd" value="_cart" />
-														<input type="hidden" name="add" value="1" />
-														<input type="hidden" name="business" value=" " />
-														<input type="hidden" name="item_name" value="<?php echo $user['NombreProduc'] ?>" />
-														<input type="hidden" name="amount" value="<?php echo $user['Precio'] ?>" />
-														<input type="hidden" name="discount_amount" value="1.00" />
-														<input type="hidden" name="currency_code" value="USD" />
-														<input type="hidden" name="return" value=" " />
-														<input type="hidden" name="cancel_return" value=" " />
-														<input type="submit" name="submit"  class="button btn" />
-													</fieldset>
-												</form>
+												
+													
+														
+														<input type="hidden" name="item_name" value="<?php echo $barritoAr['NombreArt']; ?>" />
+														<input type="hidden" name="amount" value="<?php echo $barritoAr['precio']; ?>" />
+														<input type="hidden" name="txtIdArticulo" value="<?php echo $barritoAr['id_Articulo']; ?>" />
+													
+														<input type="submit" name="btnAgregar" id="btnAgregar"  class="button btn" />	
 											</div>
+											</form>
 										</div>
 									</div>
 								</div>
@@ -132,7 +147,36 @@
 		</div>
 	</div>
 	<!-- //top products -->
+<?php
 
+	$detalleDAO=new DetalleCarritoDAO();
+
+	function asignar()
+	{
+		$detalleBO=new DetalleCarritoBO();
+		$pieza="1";
+		
+		$detalleBO->setIdArticulo($_REQUEST['txtIdArticulo']);
+		$detalleBO->setPrecioProducto($_REQUEST['amount']);
+		$detalleBO->setIdUsuario($_SESSION['ID']);
+		$StatusCarrito="No Pagado";
+		$detalleBO->setStatusDetalleCarrito($StatusCarrito);
+		$detalleBO->setPiezasProduc($pieza);
+
+		return $detalleBO;
+	}
+	if(isset($_SESSION["id_TipoUsu"])==true)
+	{
+		if(isset($_REQUEST["btnAgregar"]))
+		{
+		$detalleDAO->insertarDetalle(asignar());
+		}
+	}
+	{
+		print '<script languaje="JavaScript">alert("Para Agregar al carrito debe loguearse");</script>';
+	}
+
+?>
 <?php
 include "footerCli.php";
 ?>

@@ -2,11 +2,11 @@
 include '../DAO/Conexion.php';
 session_start();
 $conex=Conexion::conectar();
-$categoria="SELECT id_Categoria,NombreCategoria FROM categoria WHERE id_SubCate is NULL";
+$categoria="SELECT id_Categoria,NombreCategoria FROM Categoria WHERE id_SubCate is NULL";
 $lis=$conex->prepare($categoria);
 $lis->execute();
 $lista=$lis->fetchall();
-$marcas="SELECT id_Marca,NombreMarca FROM marca";
+$marcas="SELECT id_Marca,NombreMarca FROM Marca";
 	$lisMarca=$conex->prepare($marcas);
 	$lisMarca->execute();
 	$listaMarca=$lisMarca->fetchAll();
@@ -43,6 +43,10 @@ $marcas="SELECT id_Marca,NombreMarca FROM marca";
 
 	<!-- Custom-Files -->
 	<link href="../Recursos/css/bootstrapCli.css" rel="stylesheet" type="text/css" media="all" />
+
+	
+	
+
 	<!-- Bootstrap css -->
 	<link href="../Recursos/css/styleCli.css" rel="stylesheet" type="text/css" media="all" />
 	<!-- Main css -->
@@ -91,7 +95,7 @@ $marcas="SELECT id_Marca,NombreMarca FROM marca";
 								<form action="#" method="post" class="last">
 									<input type="hidden" name="cmd" value="_cart">
 									<input type="hidden" name="display" value="1">
-									<button class="btn w3view-cart" type="submit" name="submit" value="">
+									<button class="btn w3view-cart" type="" name="submit" value="">
 										<i class="fas fa-cart-arrow-down"></i>
 									</button>
 								</form>
@@ -145,7 +149,7 @@ $marcas="SELECT id_Marca,NombreMarca FROM marca";
 						</li>
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;
 						<li class="nav-item mr-lg-2 mb-lg-0 mb-2">
-						<a class="nav-link text-white" href="Vender.php">Favoritos</a>
+						<a class="nav-link text-white" href="Vender.php">Productos</a>
 						</li>
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;
 						<li class="nav-item mr-lg-2 mb-lg-0 mb-2 text-left">

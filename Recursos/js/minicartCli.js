@@ -2859,12 +2859,12 @@ View.prototype.bind = function bind(form) {
     }
 
     if (form.display) {
-        events.add(form, 'submit', function (e) {
+        events.add(form, 'Submit', function (e) {
             e.preventDefault();
             that.show();
         });
     } else {
-        events.add(form, 'submit', function (e) {
+        events.add(form, 'Submit', function (e) {
             e.preventDefault(e);
             that.model.cart.add(forms.parse(form));
         });
