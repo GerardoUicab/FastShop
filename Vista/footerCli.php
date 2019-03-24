@@ -7,25 +7,19 @@
 			<div class="container py-md-5 py-sm-4 py-3">
 				<div class="row footer-info w3-agileits-info">
 					<!-- footer categories -->
-					<div class="col-md-3 col-sm-6 footer-grids">
+					<div class="col-md-4 col-sm-4 footer-grids">
 						<h3 class="text-white font-weight-bold mb-3">¿Quienes somos?</h3>
 							<p style="color:#FFFFFF;">Somos una empresa</p>
 					</div>
 					<!-- //footer categories -->
 					<!-- quick links -->
-					<div class="col-md-3 col-sm-6 footer-grids mt-sm-0 mt-4">
+					<div class="col-md-4 col-sm-4 footer-grids mt-sm-0 mt-4">
 						<h3 class="text-white font-weight-bold mb-3">Acerca de</h3>
 						<p style="color:#FFFFFF;">Somos una empresa</p>
 					</div>
-					<div class="col-md-3 col-sm-6 footer-grids mt-md-0 mt-4">
+					<div class="col-md-4 col-sm-4 footer-grids mt-md-0 mt-4">
 						<h3 class="text-white font-weight-bold mb-3">Nosotros</h3>
 						<p style="color:#FFFFFF;">Somos una empresa</p>
-					</div>
-					<div class="col-md-3 col-sm-6 footer-grids w3l-agileits mt-md-0 mt-4">
-						<!-- newsletter -->
-						<h3 class="text-white font-weight-bold mb-3">Newsletter</h3>
-						<p class="mb-3">Free Delivery on your first order!</p>
-						<!-- //social icons -->
 					</div>
 				</div>
 				<!-- //quick links -->
@@ -41,6 +35,7 @@
 	<!-- js-files -->
 	<!-- jquery -->
 	<script src="../Recursos/js/jquery-2.2.3.minCli.js"></script>
+	
 	<!-- //jquery -->
 
 	<!-- nav smooth scroll -->

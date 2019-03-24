@@ -33,6 +33,7 @@ if(isset($_POST['btnIniciar']))
                     $_SESSION['Apellido']=$lis['Apellido'];
                     $_SESSION['Contrasenia']=$lis['Contrasenia'];
                     $_SESSION['Email']=$lis['Email'];
+                    $_SESSION['Foto']=$lis['fotoUsuario'];
                 }
                 
                 

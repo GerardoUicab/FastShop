@@ -2,8 +2,9 @@
     include 'headerAdmin.php';
     include '../DAO/MarcaDAO.php';
     $conex=Conexion::conectar();
-    $cmd="SELECT * FROM marca";
-    $lis=$conex->query($cmd);
+    $cmd="SELECT * FROM Marca ORDER BY id_Marca desc";
+    $lis=$conex->prepare($cmd);
+    $lis->execute();
     $listado=$lis->fetchAll();
 ?>
  <body>
@@ -129,7 +130,11 @@ if(isset($_REQUEST["btnAgregar"]))
 }
 
 ?>
-
+<script>
+<?php if(isset($_REQUEST["btnAgregar"])==true){?>
+ window.location.replace("MarcasAdmin.php");
+<?php }?>
+</script>
 <?php 
 include 'footerAdmin.php';
  ?>

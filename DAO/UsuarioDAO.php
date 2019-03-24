@@ -17,7 +17,7 @@
             $email=$objusu->getEmail();
             $contraseña=$objusu->getContraseña();
             $idTipoUsu=$objusu->getIdTipoUsu();
-            $comando=("insert into usuario (id_TipoUsu,Nombre,Contrasenia,Email) values ('$idTipoUsu','$nombre','$contraseña','$email')");
+            $comando="insert into usuario (id_TipoUsu,Nombre,Contrasenia,Email) values ('$idTipoUsu','$nombre','$contraseña','$email')";
             
             
             if(!$con->query($comando))
@@ -40,7 +40,7 @@
             $email=$objusu->getEmail();
             $contraseña=$objusu->getContraseña();
             $idTipoUsu=$objusu->getIdTipoUsu();
-            $comando=("insert into usuario (id_TipoUsu,Nombre,Contrasenia,Email) values ('$idTipoUsu','$nombre','$contraseña','$email')");
+            $comando="insert into usuario (id_TipoUsu,Nombre,Contrasenia,Email) values ('$idTipoUsu','$nombre','$contraseña','$email')";
             
             
             if(!$con->query($comando))
@@ -56,7 +56,67 @@
             $con=null;
         }
 
+        public function ModificarFoto($objfoto)
+        {
+            $conex=Conexion::conectar();
+            $nombre=$objfoto->getFoto();
+            $idUsuario=$objfoto->getId();
+            $comando="update Usuario set fotoUsuario='$nombre' where id_Usuario=$idUsuario";
+            if(!$conex->query($comando))
+            {
+                
+                echo '<script>swal("Advertencia", "No se pudo modificar su foto","warning");</script>';
+            }
+            else
+            {
+                
+                echo '<script>swal(
+                    {
+                        title:"Exito",
+                        text: "Usted modifico su foto correctamente",
+                        icon: "success",
+                        button:"Aceptar",
+                    }
+                ).then((value)=>
+                {
+                    window.location.replace("EditarUsuario.php");
+                });</script>';
+            }
+            $conex=null;
+        }
+        public function ModificarDatos($objusu)
+        {
+            $conex=Conexion::conectar();
+            $nom=$objusu->getNombre();
+            $apelli=$objusu->getApellido();
+            $email=$objusu->getEmail();
+            $contra=$objusu->getContraseña();
+            $idusu=$objusu->getId();
 
+            $cmd="UPDATE usuario set Nombre='$nom', Apellido='$apelli', Contrasenia='$contra', Email='$email' where id_Usuario=$idusu";
+            
+            if(!$conex->query($cmd))
+            {
+                echo '<script>swal("Advertencia", "No se pudo modificar su foto","warning");</script>';
+            }
+            else
+            {
+                echo '<script>
+                swal(
+                    {
+                        title: "Exito",
+                        text: "Usted modifico sus datos",
+                        icon: "warning",
+                        button: "Aceptar",
+                    }).then((value)=>
+                    {
+                        <script>window.location.replace("EditarUsuario.php");</script>
+                    }
+                );</script>';
+            }
+            
+            $conex=null;
+        }
 
 
     }

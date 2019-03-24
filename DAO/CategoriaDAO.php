@@ -22,11 +22,11 @@
     
             if(!$con->query($ejecu))
             {
-                print "erro al insertar";
+                print '<script languaje="JavaScript">alert("Error al agregar");</script>';
             }
             else
             {   
-                print '<div class="alert alert-danger">Guardado con exito</div>';
+                print '<script languaje="JavaScript">alert("Guardado");</script>';
             }
             $con=null;
 

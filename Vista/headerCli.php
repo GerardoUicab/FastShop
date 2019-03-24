@@ -1,3 +1,4 @@
+<script src="../Recursos/js/sweetalert.min.js"></script>
 <?php 
 include '../DAO/Conexion.php';
 session_start();
@@ -10,8 +11,38 @@ $marcas="SELECT id_Marca,NombreMarca FROM Marca";
 	$lisMarca=$conex->prepare($marcas);
 	$lisMarca->execute();
 	$listaMarca=$lisMarca->fetchAll();
+if(isset($_SESSION['ID'])==true){
+	$contar="select count(id_DetaCarrito) as contar from detallecarrito where id_Usuario='".$_SESSION['ID']."' and StatusDetalleCarrito='No Pagado'";
+	$lisContar=$conex->prepare($contar);
+	$lisContar->execute();
+	$listaContar=$lisContar->fetchAll();
+	$usuario="SELECT * FROM usuario where id_Usuario='".$_SESSION['ID']."'";
+	$lisvar=$conex->query($usuario);
+	$lisvar->execute();
+	$listavar=$lisvar->fetchAll();
+
+	foreach($listavar as $usu)
+	{
+		$foto=$usu['fotoUsuario'];
+		$nombre=$usu['Nombre'];
+	}
+	foreach($listaContar as $can)
+	{
+		$mos=$can['contar'];
+	}
+}
+else
+{
+	$mos='';
+}
 
 ?>
+<style>
+ .imagenes {
+        border-radius: 50%;
+    }
+
+</style>
 <script>
 	<?php if(isset($_SESSION["id_TipoUsu"])==true && $_SESSION["id_TipoUsu"]!=2){ ?>
     
@@ -72,7 +103,7 @@ $marcas="SELECT id_Marca,NombreMarca FROM Marca";
 					<h1 class="text-center">
 						<a href="indexCli.php" class="font-weight-bold font-italic">
 					
-							<img src="../Recursos/images/FastShop.png"  style="width:45%; padding-top:15px; right " class="img-fluid">Fast Shop
+							<img src="../Recursos/images/FastShop.png"  style="width:45%; padding-top:15px; right " class="imagenes">Fast Shop
 						</a>
 					</h1>
 					
@@ -83,8 +114,8 @@ $marcas="SELECT id_Marca,NombreMarca FROM Marca";
 					<div class="row">
 						<!-- Buscador -->
 						<div class="col-10 agileits_search">
-							<form class="form-inline" action="#" method="post">
-								<input class="form-control mr-sm-2" type="search" placeholder="Buscar...." aria-label="Search" required>
+							<form class="form-inline" name="id" action="BusquedaArticulo.php" method="get">
+								<input class="form-control mr-sm-2" type="search" name="txtNombreArchivo" id="txtNombreArchivo" placeholder="Buscar...." aria-label="Search" required>
 								<button class="btn my-2 my-sm-0" type="submit">Buscar</button>
 							</form>
 						</div>
@@ -92,11 +123,10 @@ $marcas="SELECT id_Marca,NombreMarca FROM Marca";
 						<!-- Carrito de compra -->
 						<div class="col-2 top_nav_right text-center mt-sm-0 mt-2">
 							<div class="wthreecartaits wthreecartaits2 cart cart box_1">
-								<form action="#" method="post" class="last">
-									<input type="hidden" name="cmd" value="_cart">
-									<input type="hidden" name="display" value="1">
-									<button class="btn w3view-cart" type="" name="submit" value="">
-										<i class="fas fa-cart-arrow-down"></i>
+								<form action="CarritoProceso.php" method="post" class="last">
+									
+									<button class="btn w3view-cart" style="width:70px;"type="" name="submit" value="">
+										<i class="fas fa-cart-arrow-down"><?php echo $mos?></i>
 									</button>
 								</form>
 							</div>
@@ -123,10 +153,13 @@ $marcas="SELECT id_Marca,NombreMarca FROM Marca";
 										Categorias
 									</a>
 									<div class="dropdown-menu">
+									
 									<?php  foreach($lista as $recorer){ ?>
-										<a class="dropdown-item" id="<?php echo $recorer['id_Categoria']; ?>"  href="product.html"><?php echo $recorer['NombreCategoria']; ?></a>
+										<a class="dropdown-item" href="Busquedas.php?id=<?php echo $recorer['id_Categoria']; ?>"><?php echo $recorer['NombreCategoria']; ?></a>
 										<?php } ?>
+									
 									</div>
+									
 								</li>
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;
 						<li class="nav-item dropdown mr-lg-2 mb-lg-0 mb-2">
@@ -135,7 +168,7 @@ $marcas="SELECT id_Marca,NombreMarca FROM Marca";
 									</a>
 									<div class="dropdown-menu">
 									<?php  foreach($listaMarca as $recorrer){ ?>
-										<a class="dropdown-item" id="<?php echo $recorrer['id_Marca']; ?>"  href="product.html"><?php echo $recorrer['NombreMarca']; ?></a>
+										<a class="dropdown-item"  href="BusquedaMarca.php?id=<?php echo $recorrer ['id_Marca'];?>"><?php echo $recorrer['NombreMarca']; ?></a>
 										<?php } ?>
 									</div>
 								</li>
@@ -157,18 +190,36 @@ $marcas="SELECT id_Marca,NombreMarca FROM Marca";
 							if(isset($_SESSION["Nombre"])>null)
 							{
  							if(isset($_SESSION["Nombre"]))  
- 								{  
-									  echo '
-									  <li class="nav-item dropdown mr-lg-2 mb-lg-0 mb-2">
+ 								{
+									 if($_SESSION['Foto']!=null){
+										echo '
+									  <li class="nav-item dropdown text-center mr-lg-2 mb-lg-0 mb-2">
 									<a class="nav-link dropdown-toggle text-white" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-										Bienvenido: '.$_SESSION["Nombre"].'
+										Bienvenido: '.$nombre.'
 									</a>
-									<div class="dropdown-menu">
-									<a class="dropdown-item"  href="#"><img src="../Recursos/images/admin.jpg" style="width:50px; height:50px; margin:10px auto;" alt="..." class="img img-circle"></a>
-										<a class="dropdown-item"  href="product.html">'.$_SESSION['Nombre'].'</a>
+									<div class="dropdown-menu text-center">
+									<a class="dropdown-item"  href="#"><img src="../Recursos/images/'.$foto.'" style="width:50px; height:50px; margin:10px auto;" alt="..." class="imagenes"></a>
+										<a class="dropdown-item">'.$nombre.'</a>
+										<a class="dropdown-item btn-link" style="color:blue;"  href="EditarUsuario.php">Editar perfil</a>
 										<a  class="dropdown-item" href="CerrarSession.php"><div class="btn btn-primary">Cerrar Sesion</div></a>
 									</div>
-								</li>';						  
+								</li>';	
+									 }  else
+									 {
+										echo '
+									  <li class="nav-item dropdown mr-lg-2 mb-lg-0 mb-2">
+									<a class="nav-link dropdown-toggle text-white" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+										Bienvenido: '.$nombre.'
+									</a>
+									<div class="dropdown-menu">
+									<a class="dropdown-item"><img src="../Recursos/images/png.png" style="width:50px; height:50px; margin:10px auto;" alt="..." class="imagenes"></a>
+										<a class="dropdown-item">'.$nombre.'</a>
+										<a class="dropdown-item btn-link" style="color:blue;"  href="EditarUsuario.php">Editar perfil</a>
+										<a  class="dropdown-item" href="CerrarSession.php"><div class="btn btn-primary">Cerrar Sesion</div></a>
+									</div>
+								</li>';	
+									 }
+									 					  
 								 }  
 									 else  
  										{  

@@ -19,12 +19,13 @@ class MarcaDAO
 
         if(!$conex->query($cmd))
         {
-            print "erro al insertar";
+            print '<script languaje="JavaScript">alert("Error al agregar");</script>';
         }
         else
         {
-            print "Guardado con exito";
+            print '<script languaje="JavaScript">alert("Guardado");</script>';
         }
+        $conex=null;
 
     }
 

@@ -2,9 +2,14 @@
       include  '../DAO/CategoriaDAO.php';
 
       $con=Conexion::conectar();
-      $eje="SELECT * FROM categoria";
-      $hola=$con->query($eje);
-      $lista=$hola->fetchAll(PDO::FETCH_ASSOC);
+      $eje="SELECT * FROM Categoria";
+      $hola=$con->prepare($eje);
+      $hola->execute();
+      $lista=$hola->fetchAll();
+      $categoria="SELECT * FROM Categoria order by id_Categoria desc";
+      $lisC=$con->prepare($categoria);
+      $lisC->execute();
+      $listaC=$lisC->fetchAll();
      
       $txtId=(isset($_POST['txtId']))?$_POST['txtId']:NULL;
       $txtNombre=(isset($_POST['txtNombre']))?$_POST['txtNombre']:"";
@@ -80,19 +85,20 @@
             <table class="table">
   			<thead>
    				 <tr>
-      				<th scope="col" width="10px" hidden="true">idSubCategoria</th>
-                     <th scope="col" width="400px">Categoria Padre</th>
-                     <th scope="col" width="10px" hidden="true">idCategoria</th>
-                     <th scope="col" width="400px">Sub Categoria/th>
+      				<th scope="col" width="10px" hidden="true">idcategoria</th>
+                     <th scope="col" width="400px">Nombre de la categoria</th>
+                     <th scope="col" width="10px" hidden="true">idsubCategoria</th>
+                     <th scope="col" width="400px">Foto</th>
                      <th scope="col">Selecione opción</th>
     			</tr>
   			</thead>
   			<tbody>
+              <?php foreach($listaC as $barridoC){ ?>
     			<tr>
-     				       <td hidden="true">1</td>
-                            <td>Agua</td>
-                            <td hidden="true">2</td>
-                            <td>Mineral</td>
+     				       <td hidden="true"><?php echo $barridoC['id_Categoria']?></td>
+                            <td><?php echo $barridoC['NombreCategoria']?></td>
+                            <td hidden="true"><?php echo $barridoC['id_SubCate']?></td>
+                            <td><img src="../Recursos/images/<?php echo $barridoC['fotoCategoria'] ?>" style="width:40px;" class="img-thumbnail"></td>
 
                           
                           <td>
@@ -100,6 +106,7 @@
                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"><i class="">Eliminar</i></button>
                         </td>
    			 </tr>
+              <?php }?>
 			</tbody>
 			</table>
             
@@ -140,5 +147,9 @@ if(isset($_REQUEST["btnAgregar"]))
 }
 
 ?>
-
+<script>
+<?php if(isset($_REQUEST["btnAgregar"])==true) {?>
+window.location.replace("SubCategoriaAdmin.php");
+<?php }?>
+</script>
 <?php include 'footerAdmin.php' ?>

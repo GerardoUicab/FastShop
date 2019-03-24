@@ -8,6 +8,7 @@ class DetalleCarritoBO
     private $idArticulo;
     private $idUsuario;
     private $statusDetalleCarrito;
+    private $costoEnvioD;
 
 
 
@@ -16,6 +17,13 @@ class DetalleCarritoBO
         
     }
 
+    public function getCostoEnvioD(){
+      return $this->costoEnvioD;
+    }
+  
+    public function setCostoEnvioD($costoEnvioD){
+      $this->costoEnvioD = $costoEnvioD;
+    }
     public function getIdDetalleCarrito()
     {
 		return $this->idDetalleCarrito;
