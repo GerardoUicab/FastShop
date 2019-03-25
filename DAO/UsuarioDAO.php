@@ -1,75 +1,61 @@
 <?php
-    include '../BO/usuarioBO.php';
+include '../BO/usuarioBO.php';
 
-    class UsuarioDAO
+class UsuarioDAO
+{
+
+
+    public function UsuarioDAO()
+    { }
+
+    public function insertar($objusu)
     {
+        $con = Conexion::conectar();
+        $nombre = $objusu->getNombre();
+        $email = $objusu->getEmail();
+        $contraseña = $objusu->getContraseña();
+        $idTipoUsu = $objusu->getIdTipoUsu();
+        $comando = "insert into usuario (id_TipoUsu,Nombre,Contrasenia,Email) values ('$idTipoUsu','$nombre','$contraseña','$email')";
 
-        
-        public function UsuarioDAO()
-        {
 
-        }
-
-        public function insertar($objusu)
-        {
-            $con=Conexion::conectar();
-            $nombre=$objusu->getNombre();
-            $email=$objusu->getEmail();
-            $contraseña=$objusu->getContraseña();
-            $idTipoUsu=$objusu->getIdTipoUsu();
-            $comando="insert into usuario (id_TipoUsu,Nombre,Contrasenia,Email) values ('$idTipoUsu','$nombre','$contraseña','$email')";
-            
-            
-            if(!$con->query($comando))
-            {
+        if (!$con->query($comando)) {
                 print 'error al insertar';
-            }
-            else
-            {
+            } else {
                 print '<script languaje="JavaScript">alert("se creo la cuenta");</script>';
-                
             }
 
-            $con=null;
+        $con = null;
+    }
+    public function InsertarAdmin($objusu)
+    {
+        $con = Conexion::conectar();
+        $nombre = $objusu->getNombre();
+        $email = $objusu->getEmail();
+        $contraseña = $objusu->getContraseña();
+        $idTipoUsu = $objusu->getIdTipoUsu();
+        $comando = "insert into usuario (id_TipoUsu,Nombre,Contrasenia,Email) values ('$idTipoUsu','$nombre','$contraseña','$email')";
 
-        }
-        public function InsertarAdmin($objusu)
-        {
-            $con=Conexion::conectar();
-            $nombre=$objusu->getNombre();
-            $email=$objusu->getEmail();
-            $contraseña=$objusu->getContraseña();
-            $idTipoUsu=$objusu->getIdTipoUsu();
-            $comando="insert into usuario (id_TipoUsu,Nombre,Contrasenia,Email) values ('$idTipoUsu','$nombre','$contraseña','$email')";
-            
-            
-            if(!$con->query($comando))
-            {
+
+        if (!$con->query($comando)) {
                 print 'error al insertar';
-            }
-            else
-            {
+            } else {
                 print '<script languaje="JavaScript">alert("se creo la cuenta");</script>';
-                
             }
 
-            $con=null;
-        }
+        $con = null;
+    }
 
-        public function ModificarFoto($objfoto)
-        {
-            $conex=Conexion::conectar();
-            $nombre=$objfoto->getFoto();
-            $idUsuario=$objfoto->getId();
-            $comando="update Usuario set fotoUsuario='$nombre' where id_Usuario=$idUsuario";
-            if(!$conex->query($comando))
-            {
-                
+    public function ModificarFoto($objfoto)
+    {
+        $conex = Conexion::conectar();
+        $nombre = $objfoto->getFoto();
+        $idUsuario = $objfoto->getId();
+        $comando = "update Usuario set fotoUsuario='$nombre' where id_Usuario=$idUsuario";
+        if (!$conex->query($comando)) {
+
                 echo '<script>swal("Advertencia", "No se pudo modificar su foto","warning");</script>';
-            }
-            else
-            {
-                
+            } else {
+
                 echo '<script>swal(
                     {
                         title:"Exito",
@@ -82,45 +68,37 @@
                     window.location.replace("EditarUsuario.php");
                 });</script>';
             }
-            $conex=null;
-        }
-        public function ModificarDatos($objusu)
-        {
-            $conex=Conexion::conectar();
-            $nom=$objusu->getNombre();
-            $apelli=$objusu->getApellido();
-            $email=$objusu->getEmail();
-            $contra=$objusu->getContraseña();
-            $idusu=$objusu->getId();
+        $conex = null;
+    }
+    public function ModificarDatos($objmodificar)
+    {
+        $conex = Conexion::conectar();
+        $nom = $objmodificar->getNombre();
+        $apelli = $objmodificar->getApellido();
+        $email = $objmodificar->getEmail();
+        $contra = $objmodificar->getContraseña();
+        $idusu = $objmodificar->getId();
 
-            $cmd="UPDATE usuario set Nombre='$nom', Apellido='$apelli', Contrasenia='$contra', Email='$email' where id_Usuario=$idusu";
-            
-            if(!$conex->query($cmd))
-            {
+    $cmd = "UPDATE usuario set Nombre='$nom', Apellido='$apelli', Contrasenia='$contra', Email='$email' where id_Usuario='$idusu'";
+
+        if (!$conex->query($cmd)) {
                 echo '<script>swal("Advertencia", "No se pudo modificar su foto","warning");</script>';
-            }
-            else
-            {
+            } else {
+               
                 echo '<script>
                 swal(
                     {
                         title: "Exito",
                         text: "Usted modifico sus datos",
-                        icon: "warning",
+                        icon: "success",
                         button: "Aceptar",
                     }).then((value)=>
                     {
-                        <script>window.location.replace("EditarUsuario.php");</script>
-                    }
-                );</script>';
+                        window.location.replace("EditarUsuario.php");
+                    });</script>';
             }
-            
-            $conex=null;
-        }
 
-
+        $conex = null;
     }
-
-
-
-?>
+}
+ 

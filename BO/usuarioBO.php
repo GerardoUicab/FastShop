@@ -62,7 +62,7 @@ class usuarioBO
 			$this->foto = $foto;
 		}
 		public function getApellido(){
-			return $this->id;
+			return $this->apellido;
 		}
 	
 		public function setApellido($apellido){

@@ -12,10 +12,35 @@ $lisUsua = $conex->query($usua);
 $lisUsua->execute();
 $listaUsua = $lisUsua->fetchAll();
 foreach ($listaUsua as $datos) {
-        $nom = $datos['Nombre'];
-        $ape = $datos['Apellido'];
-        $contra = $datos['Contrasenia'];
-        $email = $datos['Email'];
+    $nom = $datos['Nombre'];
+    $ape = $datos['Apellido'];
+    $contra = $datos['Contrasenia'];
+    $email = $datos['Email'];
+}
+
+$direccion = "select p.*, e.id_Estado,e.NombreEstado,c.id_Ciudad,c.NombreCiudad,co.id_Comunidad,co.NombreComunidad,
+d.Calle,d.CalleExterior,d.CalleInterior,d.CodigoPostal from
+pais p, estado e, ciudad c, comunidad co, direccion d where 
+p.id_Pais=e.id_Pais and e.id_Estado=c.id_Estado and c.id_ciudad=co.id_Ciudad 
+and co.id_Comunidad=d.id_Comunidad
+and d.id_Usuario='" . $_SESSION['ID'] . "'";
+$lisDirec = $conex->prepare($direccion);
+$lisDirec->execute();
+$listaDirec = $lisDirec->fetchAll();
+
+foreach ($listaDirec as $datoDirec) {
+        $idPais = $datoDirec['id_Pais'];
+        $nombrePais = $datoDirec['NombrePais'];
+        $idEstado = $datoDirec['id_Estado'];
+        $nombreEstado = $datoDirec['NombreEstado'];
+        $idCiudad = $datoDirec['id_Ciudad'];
+        $nombreCiudad = $datoDirec['NombreCiudad'];
+        $idComunidad = $datoDirec['id_Comunidad'];
+        $nombreComunidad = $datoDirec['NombreComunidad'];
+        $calle = $datoDirec['Calle'];
+        $calleEx = $datoDirec['CalleExterior'];
+        $calleInte = $datoDirec['CalleInterior'];
+        $codigoPos = $datoDirec['CodigoPostal'];
     }
 ?>
 <style>
@@ -26,7 +51,7 @@ foreach ($listaUsua as $datos) {
         box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.3);
         padding: 20px;
         width: 100%;
-        height: 80%;
+
 
     }
 
@@ -165,33 +190,73 @@ if (isset($_SESSION["id_TipoUsu"]) == true && $_SESSION["id_TipoUsu"] != 2) { ?>
         </div>
         <div class="col-md-7 divborde " disabled="true" style="color:#000;">
             <h5 id="h5datos" name="h5datos" hidden="true" class="text-center text-danger">Datos Personales</h5><br>
-            
-                <div class="col-md-12 subdiv" id="divDatos" name="divDatos" hidden="true">
+
+            <div class="col-md-12 subdiv" id="divDatos" name="divDatos" hidden="true">
                 <form method="POST">
                     <label>Nombre(s) usuario</label>
                     <input type="text" id="txtNombre" value="<?php echo $nom ?>" name="txtNombre" class="col-md-12 caja" required>
                     <label>Apellido(s)</label>
-                    <input type="text" class="col-md-12 caja" value="<?php echo $ape ?>" id="txtApelldio" name="txtApelldio" required>
+                    <input type="text" class="col-md-12 caja" value="<?php echo $ape ?>" id="txtApe" name="txtApe" required>
                     <label>E-mail</label>
                     <input type="email" class="col-md-12 caja" value="<?php echo $email ?>" id="txtEmail" name="txtEmail" required>
                     <label>Contraseña</label>
                     <input type="password" class="col-md-12 caja" value="<?php echo $contra ?>" id="txtContraseña" name="txtContraseña" required>
-                    <input type="submit" style="margin-top:20px;" id="btnGuDatos" value="Guardar" class="btn btnenviar">
-                    </form>
-                </div>
-            
+                    <input type="submit" style="margin-top:20px;" name="btnGuDatos" id="btnGuDatos" value="Guardar" class="btn btnenviar">
+                </form>
+            </div>
+
             <br>
             <h5 class="text-center text-danger" id="h5Direcdion" name="h5Direcdion" hidden="true">Direccion</h1>
 
                 <div class="col-md-12 subdiv " id="divDireccion" name="divDireccion" hidden="true" style="margin-top:20px;">
-                    <label>Nombre usuario</label>
-                    <input type="text" class="col-md-12 caja">
-                    <label>Nombre usuario</label>
-                    <input type="text" class="col-md-12 caja">
-                    <label>Nombre usuario</label>
-                    <input type="text" class="col-md-12 caja">
-                    <input type="submit" style="margin-top:20px;" value="Guardar" class="btn btnenviar">
+                <form method="post" enctype="multipart/form-data">
+                    <div class="form-row">
+                        <div class="col-md-3">
+                            <label>Seleccione País:</label>
+                            <select name="cmbCategorias" id="cmbPais" required style="" class="caja col-md-12">
+                                <option id="optsele" name="optSele" value="<?php echo $datoDirec['id_Pais']; ?>"><?php echo $datoDirec['NombrePais']; ?></option>
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <label>Seleccione Estado:</label>
+                            <select name="cmbCategorias" id="cmbEstado" required style="" class="caja col-md-12">
+                                <option id="optsele" name="optSele" value="<?php echo $datoDirec['id_Estado']; ?>"><?php echo $datoDirec['NombreEstado']; ?></option>
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <label>Seleccione Ciudad</label>
+                            <select name="cmbCategorias" id="cmbCiudad" required style="" class="caja col-md-12">
+                                <option id="optsele" name="optSele" value="<?php echo $datoDirec['id_Ciudad']; ?>"><?php echo $datoDirec['NombreCiudad']; ?></option>
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <label>Seleccione Colonia</label>
+                            <select name="cmbCategorias" id="cmbColonia" required style="" class="caja col-md-12">
+                                <option id="optsele" name="optSele" value="<?php echo $datoDirec['id_Comunidad']; ?>"><?php echo $datoDirec['NombreComunidad']; ?></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row" style="margin-top:20px;">
+                        <div class="col-md-3">
+                            <label>Codigo postal</label>
+                            <input type="text" id="txtCodigoPostal" name="txtCodigoPostal" value="<?php echo $datoDirec['CodigoPostal'] ?>" required class="col-md-12 caja">
+                        </div>
+                        <div class="col-md-3">
+                            <label>Calle Principal</label>
+                            <input type="text" id="CallePrin" name="CallePrin" value="<?php echo $datoDirec['Calle'] ?>" required class="col-md-12 caja">
+                        </div>
+                        <div class="col-md-3">
+                            <label>Calle Interior</label>
+                            <input type="text" id="txtCalleInt" name="txtCalleInt" value="<?php echo $datoDirec['CalleInterior'] ?>" class="col-md-12 caja">
+                        </div>
+                        <div class="col-md-3">
+                            <label>Calle Exterior</label>
+                            <input type="text" id="txtCalleExte" name="txtCalleExte" value="<?php echo $datoDirec['CalleExterior'] ?>" class="col-md-12 caja">
+                        </div>
+                    </div>
 
+                    <input type="submit" style="margin-top:20px;" value="Guardar" class="btn btnenviar">
+                </form>
                 </div>
                 <br>
                 <h5 class="text-center text-danger" id="h5Foto" name="h5Foto" hidden="true">Foto de Perfil</h1>
@@ -235,7 +300,7 @@ if (isset($_SESSION["id_TipoUsu"]) == true && $_SESSION["id_TipoUsu"] != 2) { ?>
             reader.onload = (function(theFile) {
                 return function(e) {
                     // Insertamos la imagen
-                    document.getElementById("fotoli").innerHTML = ['<img class="thumb" style="width:30%; height:40%;" src="', e.target.result, '" title="', escape(theFile.name), '"/>'].join('');
+                    document.getElementById("fotoli").innerHTML = ['<img class="thumb" style="width:30%; height:30%;" src="', e.target.result, '" title="', escape(theFile.name), '"/>'].join('');
                 };
             })(f);
 
@@ -281,30 +346,29 @@ function asignarDatos()
     $archivo = ($_FILES["txtfoto"] != "") ? $fecha->getTimestamp() . "_" . $_FILES["txtfoto"]["name"] : "usuario.png";
     $tmpFoto = $_FILES["txtfoto"]["tmp_name"];
     if ($tmpFoto != "") {
-            move_uploaded_file($tmpFoto, "../Recursos/images/" . $archivo);
-        }
+        move_uploaded_file($tmpFoto, "../Recursos/images/" . $archivo);
+    }
     $objUsuarioBO->setFoto($archivo);
     return $objUsuarioBO;
 }
-function modificarD()
+function ModificarD()
 {
-    $objmodi=new usuarioBO();
+    $objmodi = new usuarioBO();
     $objmodi->setId($_SESSION['ID']);
     $objmodi->setNombre($_REQUEST['txtNombre']);
-    $objmodi->setApellido($_REQUEST['txtApelldio']);
+    $objmodi->setApellido($_REQUEST['txtApe']);
     $objmodi->setEmail($_REQUEST['txtEmail']);
     $objmodi->setContraseña($_REQUEST['txtContraseña']);
     return $objmodi;
 }
 
 if (isset($_REQUEST['btnGuFoto']) == true) {
-        $objUsuario->ModificarFoto(asignarDatos());
-    }
+    $objUsuario->ModificarFoto(asignarDatos());
+}
 
-if (isset($_REQUEST['btnGuDatos']) == true)
-{ 
-    print 'hola';
-    $objUsuario->ModificarDatos(modificarD());
+if (isset($_REQUEST['btnGuDatos']) == true) {
+
+    $objUsuario->ModificarDatos(ModificarD());
 }
 
 

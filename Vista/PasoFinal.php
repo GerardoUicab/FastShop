@@ -13,6 +13,33 @@ foreach($listaResumen as $barrer)
     $tot=$barrer['Total'];
 }
 ?>
+<head>
+    <!-- Add meta tags for mobile and IE -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+</head>
+<script src="https://www.paypalobjects.com/api/checkout.js"></script>
+
+
+<style>
+   /*Consulta para visualizar el viewport*/
+   @media screen and (max-width: 400px)
+    {
+       #paypal-button-container{
+           width: 100%;
+       }
+    }
+
+   /*consulta para vista de escritorio*/
+   @media screen and (min-width: 400px) 
+   {
+       #paypal-button-container{
+           width:250px;
+           display: inline-block;
+       }
+   }
+
+</style>
 <div class="container" style="margin-top:30px;">
     <div class="jumbotron text-center" style="background-color:#dbebfa;">
         <h1 class="display-4" style="color:#00334e;">¡Paso Final!</h1>
@@ -29,64 +56,47 @@ foreach($listaResumen as $barrer)
     </div>
 </div>
 
-<head>
-    <!-- Add meta tags for mobile and IE -->
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
-    <style>
-        /* Media query for mobile viewport */
-        @media screen and (max-width: 400px) 
-        {
-            #paypal-button-container 
-            {
-                width: 100%;
-            }
-        }
-        
-        /* Media query for desktop viewport */
-        @media screen and (min-width: 400px) 
-        {
-            #paypal-button-container
-             {
-                width: 250px;
-            }
-        }
-    </style>
-</head>
+<script>
+paypal.Button.render({
+    env: 'sandbox',
+    style: {
+        label:'checkout',
+        size: 'responsive',
+        shape: 'pill',
+        color: 'gold'
+    },
 
-<body>
-    <!-- Set up a container element for the button -->
+    client: {
+        sandbox: 'AagwRKII9OFF1jgMsny2wSiT4-rKaagBfcmBrf5nwe6fZZSm1se42GorT8FOgtjzhqQlnGTOoq44hwzO',
+        production: 'AYKDtUqf_aZGDfRXeClWyvzRFZfMpDvQwSGSMF30UrgVOg_0wfxbOOolGRsXO2wC45V43RjlOo1Ve5QO'
+    },
+
     
+    payment: function(data, actions) {
+        return actions.payment.create({
+            payment: {
+                transactions: [
+                    {
+                        amount: { total: '<?php echo $tot; ?>', currency: 'MXN' },
+                        description:"Compra de productos en FastShop:$<?php echo number_format($tot,2);?>",
+                        custom:""
+                    }
+                ]
+            }
+        });
+    },
 
-    <!-- Include the PayPal JavaScript SDK -->
-    <script src="https://www.paypal.com/sdk/js?client-id=sb&currency=MXN"></script>
-
-    <script>
-        // Render the PayPal button into #paypal-button-container
-        paypal.Buttons({env: 'sandbox',
-style:
-{
-	size: 'responsive',
-	shape: 'pill',
-	color: 'blue'
-},
-
-    createOrder: function(data, actions) {
-      // Set up the transaction
-      return actions.order.create({
-        purchase_units: [{
-          amount: {
-            value: '<?php echo $tot; ?>'
-          }
-        }]
-      });
+    onAuthorize: function(data, actions){
+        return actions.payment.execute().then(function() { 
+            console.log(data);
+            window.location="TerminarProceso.php?paymentToken="+data.paymentToken+"&paymentID="+data.paymentID;
+        });
     }
+ 
+ },'#paypal-button-container');
 
-}).render('#paypal-button-container');
-
-    </script>
-</body>
+</script>
 <?php
 
 $obj=new DetalleCarritoDAO();
