@@ -90,14 +90,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 											</div>	
 										</a>
 										<ul class="dropdown-menu drp-mnu">
-										<li> <a href="#"><i class="fa fa-user"></i>Editar Perfil</a> </li> 
-										<li> <a href="#"><i class="fa fa-camera"></i>Editar Foto</a> </li> 
+										 
 										<li> <a href="CerrarSession.php"><i class="fa fa-times"></i>Cerrar Sesión</a> </li>
 										</ul>
 									</li>
 									
 						</ul>
-				</li>
+			<!--	</li>
 				<li class="second top_bell_nav">
 				   <ul class="top_dp_agile ">
 									<li class="dropdown head-dpdn">
@@ -255,7 +254,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 										</ul>
 									</li>	
 								</ul>
-				</li>
+				</li>-->
 
 				<li class="second w3l_search">
 				 

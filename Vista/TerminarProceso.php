@@ -96,7 +96,7 @@ if (isset($_SESSION["id_TipoUsu"]) == true && $_SESSION["id_TipoUsu"] != 2) { ?>
             <textarea id="txtComentario" name="txtComentario" class="col-md-12 caja" rows="2"  placeholder="ej:este telefono es un xaomi"></textarea>
             </div>
             <div class="col-md-12" style="margin-top:20px;">
-            <input id="txtCarro" name="txtCarro" value="<?php echo $idCarrito ?>" class="form-control" type="text">
+            <input id="txtCarro" name="txtCarro" value="<?php echo $idCarrito ?>" class="form-control" type="hidden">
             <input id="btnCalificar" name="btnCalificar" class="button btn col-md-12" value="Enviar Calificación" type="submit">
             </div><br>
         </div>

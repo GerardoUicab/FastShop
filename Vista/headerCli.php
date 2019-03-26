@@ -72,12 +72,7 @@ else
 	</script>
 	<script>
 <script>
-	$(document).ready(function() {
-      var refreshId =  setInterval( function(){
-    $('#feedback-bg-info').load('headerCli.php');//actualizas el div
-   }, 1000 );
-});
-	
+
 	
 	</script>
 	<!-- //Meta tag Keywords -->

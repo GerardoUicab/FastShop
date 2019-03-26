@@ -34,7 +34,7 @@
 							</div>
 							<div class="col-8 text-form-footer">
 								<h3>Paga con Paypal</h3>
-								<p>pedidos arriba de  $100</p>
+								<p>paga tus compras con paypal</p>
 							</div>
 						</div>
 					</div>
@@ -55,8 +55,8 @@
 								<i class="far fa-thumbs-up"></i>
 							</div>
 							<div class="col-8 text-form-footer">
-								<h3>Gran eleccion</h3>
-								<p>de productos</p>
+								<h3>Te gusta</h3>
+								<p>Navega con FastShop</p>
 							</div>
 						</div>
 					</div>
