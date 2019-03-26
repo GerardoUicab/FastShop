@@ -42,15 +42,11 @@ foreach($listaResumen as $barrer)
 </style>
 <div class="container" style="margin-top:30px;">
     <div class="jumbotron text-center" style="background-color:#dbebfa;">
-        <h1 class="display-4" style="color:#00334e;">¡Paso Final!</h1>
+        <h1 class="display-4" style="color:#00334e;">¡Estas a un paso más de terminar!</h1>
         <hr class="my-4">
             <p class="lead" style="color:#00334e;"><b>Estas a punto de pagar con paypal la cantidad  de:</b>
             <h4 style="color:#25d366;">$ <?php echo number_format($tot,2); ?></h4>
             <div id="paypal-button-container"></div>
-            <form  method="post" action="" class="snipcart-details">
-            <input id="txtIdusu" name="txtIdusu" class="form-control" type="hidden" value="<?php echo $_SESSION['ID']?>">
-            <input type="submit" id="btnfin" name="btnfin" value="Finalizar proceso" style="width:250px;" class="button btn">
-            </form>
             </p>
        
     </div>
@@ -64,12 +60,12 @@ paypal.Button.render({
         label:'checkout',
         size: 'responsive',
         shape: 'pill',
-        color: 'gold'
+        color: 'blue'
     },
 
     client: {
-        sandbox: 'AagwRKII9OFF1jgMsny2wSiT4-rKaagBfcmBrf5nwe6fZZSm1se42GorT8FOgtjzhqQlnGTOoq44hwzO',
-        production: 'AYKDtUqf_aZGDfRXeClWyvzRFZfMpDvQwSGSMF30UrgVOg_0wfxbOOolGRsXO2wC45V43RjlOo1Ve5QO'
+        sandbox: 'Adp-a7UQl9lALMccLe7tEaagSgBurUUNdmLGJHo7ufm3eOF00piwVD5nL65ul9r1Yk539em23a2UjFeW',
+        production: '<insert production client id>'
     },
 
     
@@ -79,7 +75,7 @@ paypal.Button.render({
                 transactions: [
                     {
                         amount: { total: '<?php echo $tot; ?>', currency: 'MXN' },
-                        description:"Compra de productos en FastShop:$<?php echo number_format($tot,2);?>",
+                        description:"Total de Compra de productos en FastShop:$<?php echo number_format($tot,2);?>",
                         custom:""
                     }
                 ]
@@ -97,24 +93,6 @@ paypal.Button.render({
  },'#paypal-button-container');
 
 </script>
-<?php
-
-$obj=new DetalleCarritoDAO();
-function validar()
-{
-    $objUs=new CarritoBO();
-
-    $objUs->setIdUsu($_REQUEST['txtIdusu']);
-    return $objUs;
-}
-
-if(isset($_REQUEST['btnfin'])==true)
-{
-    $obj->PasoFinal(validar());
-}
-
-
-?>
 <?php
 include 'footerCli.php';
 ?>

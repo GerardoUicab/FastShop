@@ -1,5 +1,6 @@
 <?php
     include 'headerCli.php';
+    include '../DAO/DetalleCarritoDAO.php';
 ?>
 <div class="container" style="margin-top:30px;">
     <div class="jumbotron text-center" style="background-color:#dbebfa;">
@@ -15,6 +16,24 @@
        
     </div>
 </div>
+<?php
+
+$obj=new DetalleCarritoDAO();
+function validar()
+{
+    $objUs=new CarritoBO();
+
+    $objUs->setIdUsu($_REQUEST['txtIdusu']);
+    return $objUs;
+}
+
+if(isset($_REQUEST['btnfin'])==true)
+{
+    $obj->PasoFinal(validar());
+}
+
+
+?>
 <?php
     include 'footerCli.php';
 

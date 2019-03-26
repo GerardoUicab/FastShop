@@ -70,6 +70,16 @@ else
 			window.scrollTo(0, 1);
 		}
 	</script>
+	<script>
+<script>
+	$(document).ready(function() {
+      var refreshId =  setInterval( function(){
+    $('#feedback-bg-info').load('headerCli.php');//actualizas el div
+   }, 1000 );
+});
+	
+	
+	</script>
 	<!-- //Meta tag Keywords -->
 
 	<!-- Custom-Files -->
@@ -125,7 +135,7 @@ else
 							<div class="wthreecartaits wthreecartaits2 cart cart box_1">
 								<form action="CarritoProceso.php" method="post" class="last">
 									
-									<button class="btn w3view-cart" style="width:70px;"type="" name="submit" value="">
+									<button class="btn w3view-cart" style="width:70px;"type=""  name="submit" value="">
 										<i class="fas fa-cart-arrow-down"><?php echo $mos?></i>
 									</button>
 								</form>
