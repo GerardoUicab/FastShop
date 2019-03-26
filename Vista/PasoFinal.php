@@ -13,6 +13,16 @@ foreach($listaResumen as $barrer)
     $tot=$barrer['Total'];
 }
 ?>
+<script>
+    <?php if (isset($_SESSION["id_TipoUsu"]) == false) { ?>
+    window.location.replace("login.php");
+    <?php 
+}
+if (isset($_SESSION["id_TipoUsu"]) == true && $_SESSION["id_TipoUsu"] != 2) { ?>
+    window.location.replace("indexAdmin.php");
+    <?php 
+} ?>
+</script>
 <head>
     <!-- Add meta tags for mobile and IE -->
     <meta name="viewport" content="width=device-width, initial-scale=1">

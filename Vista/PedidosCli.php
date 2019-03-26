@@ -14,7 +14,7 @@ $conex=Conexion::conectar();
 
 </script>
 <?php
-$buscar="select C.*,u.Nombre from carrito c, usuario u where c.id_Usuario=u.id_Usuario and c.id_Usuario='".$_SESSION['ID']."' order by c.id_Carrito desc";
+$buscar="select C.*,u.Nombre from carrito c, usuario u where c.id_Usuario=u.id_Usuario and StatusCarrito='Pagado' and c.id_Usuario='".$_SESSION['ID']."' order by c.id_Carrito desc";
 $lisBuscar=$conex->prepare($buscar);
 $lisBuscar->execute();
 $listaBuscar=$lisBuscar->fetchAll();

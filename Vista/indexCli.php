@@ -22,18 +22,18 @@
  
  
  </style>
+ 
 	<div class="footer-top-first">
 			<div class="container py-md-5 py-sm-4 py-3">
-				<!-- footer first section -->
-				<!-- footer second section -->
+				
 				<div class="row w3l-grids-footer border-top border-bottom py-sm-4 py-3">
 					<div class="col-md-4 offer-footer">
 						<div class="row">
 							<div class="col-4 icon-fot">
-								<i class="fas fa-dolly"></i>
+								<i class="fab fa-cc-paypal"></i>
 							</div>
 							<div class="col-8 text-form-footer">
-								<h3>Compra rapida</h3>
+								<h3>Paga con Paypal</h3>
 								<p>pedidos arriba de  $100</p>
 							</div>
 						</div>
@@ -44,8 +44,8 @@
 								<i class="fas fa-shipping-fast"></i>
 							</div>
 							<div class="col-8 text-form-footer">
-								<h3>Rapido envío</h3>
-								<p>a todo el pais</p>
+								<h3>Envios México </h3>
+								<p>Solo en el interior de México</p>
 							</div>
 						</div>
 					</div>
@@ -61,13 +61,14 @@
 						</div>
 					</div>
 				</div>
-				<!-- //footer second section -->
+				
 			</div>
 	</div>
+
 	<!-- ==================================== 
 	aqui esta la descripcion de que es la pagina
 	=======================================-->
-	<section id="slider" class="container">
+	<section id="slider"  class="container">
 		<ul class="slider-wrapper">
 		<?php foreach ($baner as $lista1) { ?>
 		<li class="current-slide">
@@ -89,9 +90,7 @@
 	<div class="ads-grid py-sm-5 py-4">
 		<div class="container py-xl-4 py-lg-2">
 			<!-- titulo de los productos -->
-			<h3 class="tittle-w3l text-center mb-lg-5 mb-sm-4 mb-3">
-				<span>N</span>uevos
-				<span>P</span>roductos</h3>
+			
 			<!-- //tittle heading -->
 			<div class="row">
 				<!-- product left -->
@@ -99,7 +98,9 @@
 					<div class="wrapper">
 						<!-- first section -->
 						<div class="product-sec1 px-sm-4 px-3 py-sm-5  py-3 mb-4">
-							<h3 class="heading-tittle text-center font-italic">Productos</h3>
+						<h3 class="tittle-w3l text-center mb-lg-5 mb-sm-4 mb-3">
+				<span>N</span>uevos
+				<span>P</span>roductos</h3>
 							<div class="row">
 							<?php foreach($listaArti as $barritoAr){ ?>
 								<div class="col-md-3 product-men mt-5" style="-webkit-box-shadow: 3px 10px 56px -16px rgba(181,188,232,1);

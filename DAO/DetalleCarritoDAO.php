@@ -1,6 +1,7 @@
 <?php
 include '../BO/DetalleCarritoBO.php';
 include '../BO/CarritoBO.php';
+include '../BO/CalificarBO.php';
 
 class DetalleCarritoDAO
 {
@@ -8,6 +9,35 @@ class DetalleCarritoDAO
     public function DetalleCarritoDAO()
     {
         
+    }
+     public function Calificar($objCali)
+    {
+        $conex=Conexion::conectar();
+        $idCarrito=$objCali->getIdCarrito();
+        $titulo=$objCali->getTitulo();
+        $comentarios=$objCali->getComentario();
+        $calificacion=$objCali->getCalificacion();
+        $cmd="INSERT INTO calificar(calificacion,titulo,comentario,id_Carrito)
+        values('$calificacion','$titulo','$comentarios','$idCarrito')";
+        if(!$conex->query($cmd))
+        {
+
+            print '<script languaje="JavaScript">swal("Calificación de compra", "No se pudo Calificar","warning");</script>';
+        }
+        else
+        {
+            echo '<script>swal (
+                {
+                    title:"Calificación de compra",
+                    text:"Gracias por calificar tu compra",
+                    icon: "success",
+                    button:"Aceptar",
+    
+                }).then((value)=>
+                {
+                    window.location.replace("PedidosCli.php");
+                });</script>';
+        }
     }
     public function carrito($objcar)
     {
@@ -74,6 +104,17 @@ class DetalleCarritoDAO
             $queryActualizar="UPDATE detallecarrito set StatusDetalleCarrito='Pagado' where id_DetaCarrito='".$valor['id_DetaCarrito']."'";
             $conex->query($queryActualizar);
         }
+        $dato="select max(id_Carrito) as id from carrito where 
+        StatusCarrito='Pendiente' and id_Usuario='".$idUs."'";
+        $lisdato=$conex->prepare($dato);
+        $lisdato->execute();
+        $listadoDato=$lisdato->fetchAll();
+        foreach($listadoDato as $obtener)
+        {
+            $varid=$obtener['id'];
+        }
+        $cmduodate="UPDATE carrito set StatusCarrito='Pagado' where id_Carrito=$varid";
+        $conex->query($cmduodate);
         echo '<script>swal (
             {
                 title:"Proceso terminado",
@@ -82,7 +123,7 @@ class DetalleCarritoDAO
 
             }).then((value)=>
             {
-                window.location.replace("PedidosCli.php");
+                window.location.replace("TerminarProceso.php");
             });</script>';
         $conex=null;
     }

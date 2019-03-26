@@ -106,7 +106,14 @@ $lisBuscar->execute();
 $listaBuscar=$lisBuscar->fetchAll();
 
 
-
+$calificacion="SELECT calificacion from calificar where id_Carrito=$variable";
+$lisCalificacion=$conex->prepare($calificacion);
+$lisCalificacion->execute();
+$listaCalificacion=$lisCalificacion->fetchAll();
+foreach($listaCalificacion as $puntosCali)
+{
+  $numero=$puntosCali['calificacion'];
+}
 ?>
 
 <div class="container">
@@ -124,12 +131,60 @@ $listaBuscar=$lisBuscar->fetchAll();
           <div class="col-md-12 text-center">
           <h1 style="color:#00334e;"><b>TICKET DE COMPRA</b></h1>
           </div>
-          <div class="col-md-6" style="margin-top:10px;">
+          <div class="col-md-4" style="margin-top:10px;">
           <h3 class="text-center" style="color:#00334e;">Folio Compra:<?php echo $lis['id_Carrito'] ?></h3>
           </div>
-          <div class="col-md-6" style="margin-top:10px;">
-          <h3 class=" text-center" style="color:#00334e;">Nombre: <?php echo $lis['Nombre'] ?><span class="period"></span></h3></div>
+          <div class="col-md-4" style="margin-top:10px;">
+          <h3 class=" text-center" style="color:#00334e;">Nombre: <?php echo $lis['Nombre'] ?><span class="period"></span></h3>
           </div>
+          <div class="col-md-3 text-right" style="margin-top:20px;">
+          <h5 style="color:#00334e;"><b>Calificación</b></h6>
+          <?php if(isset($numero)==null){ ?>
+            <i class="fa fa-star fa-1x" ></i>
+            <i class="fa fa-star fa-1x"  ></i>
+            <i class="fa fa-star fa-1x" ></i>
+            <i class="fa fa-star fa-1x" ></i>
+            <i class="fa fa-star fa-1x"></i>
+          <?php }?>
+          <?php if(isset($numero)==1){ ?>
+            <i class="fa fa-star fa-1x" style="color:yellow;"></i>
+            <i class="fa fa-star fa-1x" ></i>
+            <i class="fa fa-star fa-1x" ></i>
+            <i class="fa fa-star fa-1x" ></i>
+            <i class="fa fa-star fa-1x" ></i>
+          <?php }?>
+          <?php if(isset($numero)==2){ ?>
+            <i class="fa fa-star fa-1x" style="color:yellow;"></i>
+            <i class="fa fa-star fa-1x" style="color:yellow;" ></i>
+            <i class="fa fa-star fa-1x" ></i>
+            <i class="fa fa-star fa-1x" ></i>
+            <i class="fa fa-star fa-1x" ></i>
+          <?php }?>
+          <?php if(isset($numero)==3){ ?>
+            <i class="fa fa-star fa-1x" style="color:yellow;"></i>
+            <i class="fa fa-star fa-1x" style="color:yellow;" ></i>
+            <i class="fa fa-star fa-1x" style="color:yellow;"></i>
+            <i class="fa fa-star fa-1x" ></i>
+            <i class="fa fa-star fa-1x" ></i>
+          <?php }?>
+          <?php if(isset($numero)==4){ ?>
+            <i class="fa fa-star fa-1x" style="color:yellow;"></i>
+            <i class="fa fa-star fa-1x" style="color:yellow;" ></i>
+            <i class="fa fa-star fa-1x" style="color:yellow;"></i>
+            <i class="fa fa-star fa-1x" style="color:yellow;"></i>
+            <i class="fa fa-star fa-1x" ></i>
+          <?php }?>
+          <?php if(isset($numero)==5){ ?>
+            <i class="fa fa-star fa-1x" style="color:yellow;"></i>
+            <i class="fa fa-star fa-1x" style="color:yellow;" ></i>
+            <i class="fa fa-star fa-1x" style="color:yellow;"></i>
+            <i class="fa fa-star fa-1x" style="color:yellow;"></i>
+            <i class="fa fa-star fa-1x" style="color:yellow;"></i>
+          <?php }?>
+          
+          </div>
+          </div>
+          
           <div class="form-row" style="margin-top:20px;">
             <div class="col-md-4 text-center">
             <h5 style="color:#004d73;">Nombre del producto</h5>
