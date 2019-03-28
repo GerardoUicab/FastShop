@@ -23,7 +23,16 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <link href="../Recursos/css/font-awesome.css" rel="stylesheet"> 
 <!-- //font-awesome-icons -->
 <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800" rel="stylesheet">
-
+<script>
+    <?php if (isset($_SESSION["id_TipoUsu"]) == false) { ?>
+    window.location.replace("Login.php");
+    <?php 
+}
+if (isset($_SESSION["id_TipoUsu"]) == true && $_SESSION["id_TipoUsu"] != 3) { ?>
+    window.location.replace("IndexAdmin.php");
+    <?php 
+} ?>
+</script>
 
 
 

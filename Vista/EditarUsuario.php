@@ -141,7 +141,7 @@ foreach ($listaDirec as $datoDirec) {
     <?php 
 }
 if (isset($_SESSION["id_TipoUsu"]) == true && $_SESSION["id_TipoUsu"] != 2) { ?>
-    window.location.replace("indexAdmin.php");
+    window.location.replace("IndexAdmin.php");
     <?php 
 } ?>
 </script>

@@ -7,13 +7,13 @@ $conex=Conexion::conectar();
     <?php if(isset($_SESSION["id_TipoUsu"])==false){ ?>
         window.location.replace("Login.php");
     <?php }if(isset($_SESSION["id_TipoUsu"])==true && $_SESSION["id_TipoUsu"]!=2){?>
-        window.location.replace("indexAdmin.php");
+        window.location.replace("IndexAdmin.php");
     <?php }?>
     
 
 </script>
 <?php
-$buscar="select C.*,u.Nombre from carrito c, usuario u where c.id_Usuario=u.id_Usuario and StatusCarrito='Pagado' and c.id_Usuario='".$_SESSION['ID']."' order by c.id_Carrito desc";
+$buscar="select c.*,u.Nombre from carrito c, usuario u where c.id_Usuario=u.id_Usuario and StatusCarrito='Pagado' and c.id_Usuario='".$_SESSION['ID']."' order by c.id_Carrito desc";
 $lisBuscar=$conex->prepare($buscar);
 $lisBuscar->execute();
 $listaBuscar=$lisBuscar->fetchAll();

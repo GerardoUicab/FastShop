@@ -9,7 +9,7 @@ $conex = Conexion::conectar();
     <?php 
   }
   if (isset($_SESSION["id_TipoUsu"]) == true && $_SESSION["id_TipoUsu"] != 2) { ?>
-    window.location.replace("indexAdmin.php");
+    window.location.replace("IndexAdmin.php");
     <?php 
   } ?>
 </script>
@@ -104,7 +104,7 @@ dc.costoEnvioD,a.NombreArt from detallecarrito dc,articulo a where
 $lisCons = $conex->prepare($consulta);
 $lisCons->execute();
 $listaCons = $lisCons->fetchAll();
-$buscar = "select C.*,u.Nombre from carrito c, usuario u where c.id_Usuario=u.id_Usuario and c.id_Carrito='" . $variable . "' order by c.id_Carrito desc";
+$buscar = "select c.*,u.Nombre from carrito c, usuario u where c.id_Usuario=u.id_Usuario and c.id_Carrito='" . $variable . "' order by c.id_Carrito desc";
 $lisBuscar = $conex->prepare($buscar);
 $lisBuscar->execute();
 $listaBuscar = $lisBuscar->fetchAll();
@@ -118,6 +118,7 @@ foreach ($listaCalificacion as $puntosCali) {
     $numero = $puntosCali['calificacion'];
   }
 ?>
+
 
 <div class="container">
     <section class="pricing py-5 " style="margin-top:20px;">
