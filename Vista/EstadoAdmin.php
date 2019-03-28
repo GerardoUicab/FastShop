@@ -1,4 +1,5 @@
-<?php include 'headerAdmin.php';
+<?php include 'headerAdmin.php'; ?>
+<?php 
         include '../DAO/EstadoDAO.php';
         $conex=Conexion::conectar();
         $objPais="select * from pais";

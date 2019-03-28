@@ -1,31 +1,4 @@
 <?php include 'headerCli.php';?>
-<?php
-    include '../DAO/DetalleCarritoDAO.php';
-    if(isset($_GET['paymentToken'])){
-        $variable=$_GET['paymentToken'];
-    }
-    $objDAO=new DetalleCarritoDAO();
-$cone=Conexion::conectar();
-$idCarrito="select max(id_Carrito) as id from carrito where 
-StatusCarrito='Pagado' and id_Usuario='".$_SESSION['ID']."'";
-$lisIdCarrito=$cone->prepare($idCarrito);
-$lisIdCarrito->execute();
-$listaIdCarrito=$lisIdCarrito->fetchAll();
-foreach($listaIdCarrito as $obtenerId)
-{
-    $idCarrito=$obtenerId['id'];
-}
-?>
-<script>
-    <?php if (isset($_SESSION["id_TipoUsu"]) == false) { ?>
-    window.location.replace("Login.php");
-    <?php 
-}
-if (isset($_SESSION["id_TipoUsu"]) == true && $_SESSION["id_TipoUsu"] != 2) { ?>
-    window.location.replace("indexAdmin.php");
-    <?php 
-} ?>
-</script>
 <style>
     p.clasificacion {
         position: relative;
@@ -61,7 +34,6 @@ if (isset($_SESSION["id_TipoUsu"]) == true && $_SESSION["id_TipoUsu"] != 2) { ?>
         width: 100%;
     }
 </style>
-
 <form method="post">
 <div class="container">
     <div class="form-row">
@@ -90,13 +62,12 @@ if (isset($_SESSION["id_TipoUsu"]) == true && $_SESSION["id_TipoUsu"] != 2) { ?>
                 </p><br><BR>
                 <label>Titulo</label>
             <label class="text-center">Opcional</label>
-            <input id="txtTitulo" name="txtTitulo" class="form-control" placeholder="Ingrese el titulo de su compra" type="text"><br>
+            <input id="" class="form-control" placeholder="Ingrese el titulo de su compra" type="text"><br>
             <label>Comentarios</label>
             <label class="text-center">Opcional</label>
-            <textarea id="txtComentario" name="txtComentario" class="col-md-12 caja" rows="2"  placeholder="ej:este telefono es un xaomi"></textarea>
+            <textarea id="txtReseña" name="txtReseña" class="col-md-12 caja" rows="2"  placeholder="ej:este telefono es un xaomi"></textarea>
             </div>
             <div class="col-md-12" style="margin-top:20px;">
-            <input id="txtCarro" name="txtCarro" value="<?php echo $idCarrito ?>" class="form-control" type="hidden">
             <input id="btnCalificar" name="btnCalificar" class="button btn col-md-12" value="Enviar Calificación" type="submit">
             </div><br>
         </div>
@@ -111,41 +82,16 @@ if (isset($_SESSION["id_TipoUsu"]) == true && $_SESSION["id_TipoUsu"] != 2) { ?>
 
 </div>
 </form>
+
 <?php
 
-$obj=new DetalleCarritoDAO();
-function validar()
-{
-    $objUs=new CarritoBO();
 
-    $objUs->setIdUsu($_SESSION['ID']);
-    return $objUs;
-}
-
-if(isset($variable)!=null)
-{
-    $obj->PasoFinal(validar());
-}
-function asignar()
-{
-    $objBO=new CalificarBO();
-    $objBO->setCalificacion($_REQUEST['estrellas']);
-    $objBO->setIdCarrito($_REQUEST['txtCarro']);
-    $objBO->setTitulo($_REQUEST['txtTitulo']);
-    $objBO->setComentario($_REQUEST['txtComentario']);
-    
-    return $objBO;
-
-}
 if(isset($_REQUEST['btnCalificar']))
 {
-    $objDAO->Calificar(asignar());
+    $variable=$_REQUEST['estrellas'];
 }
 
 
 ?>
-<?php
-    include 'footerCli.php';
 
-
-?>
+<?php include 'footerCli.php'; ?> 

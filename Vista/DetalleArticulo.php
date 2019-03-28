@@ -1,12 +1,13 @@
 
-<?php include 'headerCli.php'; 
+<?php include 'headerCli.php'; ?>
+<?php 
  include '../DAO/DetalleCarritoDAO.php';
 $conex=Conexion::conectar();
 $idArticulo=$_POST['txtIdArticulo'];
 $cmd="select a.NombreArt,a.ReseñaArt,a.FotoArt,a.CostoEnvio,u.Nombre,
 c.NombreCategoria,m.NombreMarca,cm.precio,cm.stock,
 cr.NombreCarac,d.NombreDominio
-from Articulo a, Usuario u, Categoria c, Marca m,Combinacion cm, Caracteristicas cr, Dominio d
+from articulo a, usuario u, categoria c, Marca m,Combinacion cm, Caracteristicas cr, Dominio d
 where a.id_Categoria=c.id_Categoria and a.id_Marca=m.id_Marca 
 and a.id_Usuario=u.id_Usuario and cm.id_Articulo=a.id_Articulo 
 and cr.id_Carac=(select id_Carac from artcarac where id_Articulo=a.id_Articulo) and d.id_UsuarioDomi=a.id_Articulo
@@ -14,7 +15,7 @@ and a.id_Articulo=$idArticulo";
 $listado=$conex->prepare($cmd);
 $listado->execute();
 $listDetalle=$listado->fetchAll();
-$galeria="select Foto from Foto where id_Articulo=$idArticulo";
+$galeria="select Foto from foto where id_Articulo=$idArticulo";
 $lisGaleria=$conex->prepare($galeria);
 $lisGaleria->execute();
 $listaGaleria=$lisGaleria->fetchAll();

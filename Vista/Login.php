@@ -1,5 +1,5 @@
+<?php include 'headerCli.php'; ?>
 <?php
-include 'headerCli.php';
 
 
 if(isset($_POST['btnIniciar']))
@@ -10,7 +10,7 @@ if(isset($_POST['btnIniciar']))
     }
     else
     {
-        $query="SELECT * FROM Usuario WHERE Email=:username and Contrasenia=:password";
+        $query="SELECT * FROM usuario WHERE Email=:username and Contrasenia=:password";
         $cmd=$conex->prepare($query);
         $cmd->execute(
             array(

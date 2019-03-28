@@ -1,13 +1,13 @@
+<?php ob_start(); ?><?php session_start(); ?>
 <script src="../Recursos/js/sweetalert.min.js"></script>
 <?php 
 include '../DAO/Conexion.php';
-session_start();
 $conex=Conexion::conectar();
-$categoria="SELECT id_Categoria,NombreCategoria FROM Categoria WHERE id_SubCate is NULL";
+$categoria="SELECT id_Categoria,NombreCategoria FROM categoria WHERE id_SubCate is NULL";
 $lis=$conex->prepare($categoria);
 $lis->execute();
 $lista=$lis->fetchall();
-$marcas="SELECT id_Marca,NombreMarca FROM Marca";
+$marcas="SELECT id_Marca,NombreMarca FROM marca";
 	$lisMarca=$conex->prepare($marcas);
 	$lisMarca->execute();
 	$listaMarca=$lisMarca->fetchAll();
@@ -146,6 +146,10 @@ else
 		<div class="container">
 			<nav class="navbar navbar-expand-lg navbar-light bg-light" >
 				<!--aqui termina-->
+				<button class="navbar-toggler" style="background-color:fff;"  type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+				    aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon" ></span>
+				</button>
 				<div class="collapse navbar-collapse text-center" id="navbarSupportedContent">
 					<ul class="navbar-nav ml-auto text-center col-md-12">
 								<li class="nav-item active mr-lg-2 mb-lg-0 mb-2">
@@ -187,7 +191,7 @@ else
 						</li>
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;
 						<li class="nav-item mr-lg-2 mb-lg-0 mb-2">
-						<a class="nav-link text-white" href="Vender.php">Productos</a>
+						<a class="nav-link text-white" href="MisProducto.php">Productos</a>
 						</li>
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;
 						<li class="nav-item mr-lg-2 mb-lg-0 mb-2 text-left">

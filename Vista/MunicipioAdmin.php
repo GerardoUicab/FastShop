@@ -1,4 +1,4 @@
-<?php include 'headerAdmin.php'?><br>
+<?php include 'headerAdmin.php'; ?><br>
     <body>
             <div class="container">
             <h1 class="heading-tittle" align="center">

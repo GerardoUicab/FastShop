@@ -1,15 +1,26 @@
-<?php include 'headerCli.php';
-
+<?php include 'headerCli.php'; ?>
+<?php
 $variable=$_GET["txtNombreArchivo"];
 $conex=Conexion::conectar();
 $cmd="select a.id_Articulo, a.NombreArt,a.FotoArt,a.costoEnvio,u.nombre,c.precio,c.stock from 
-articulo a,Combinacion c, Usuario u where a.id_Usuario=u.id_Usuario
+articulo a,combinacion c, usuario u where a.id_Usuario=u.id_Usuario
  and c.id_Articulo=a.id_Articulo and a.StatusArt='Públicado' and c.stock !=0  and a.NombreArt like '$variable%'";
  $lisProducto=$conex->prepare($cmd);
  $lisProducto->execute();
  $listaProducto=$lisProducto->fetchAll();
 
 ?>
+<style>
+    .subdiv {
+        border-radius: 25px;
+
+        background: linear-gradient(to right, #fff, #dbebfa);
+
+        box-shadow: 0 0.0rem 1rem 0 rgba(0, 0, 0, 0.3);
+        padding: 20px;
+        width: 100%;
+    }
+</style>
 <div class="container">
 <div class="row" style="margin-top:20px;">
 							<?php foreach($listaProducto as $barritoAr){ ?>
@@ -65,6 +76,21 @@ box-shadow: 3px 10px 56px -16px rgba(181,188,232,1);">
                                 }?>
                                     
                                 
+							<?php }?>
+							<?php if(empty($listaProducto)){ ?>
+								<div class="form-row text-center subdiv" style="margin-top:30px;">
+            <div class="col-md-12 ">
+                <img src="../Recursos/images/car.png">
+                <h3 style="color:#00334e;" class="text-center"><b>No se encontrarón productos con este nombre</b></h3>
+                <hr>
+                <h6>Intente con otro nombre</h6>
+                <hr>
+
+            </div>
+
+
+        </div>
+    </div><br>
 							<?php }?>
 							</div>
 

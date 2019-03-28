@@ -24,7 +24,7 @@
         $fechaSubido=$objArticulo->getFechaSubido();
         $idUsuario=$objArticulo->getIdUsuario();
         $statusArt="No Públicado";
-        $cmd="INSERT INTO Articulo(NombreArt,ReseñaArt,FotoArt,FechaSubido,StatusArt,id_Usuario,id_Categoria,id_Marca,CostoEnvio)Values('$nombreArticulo','$reseñaArtiulo','$fotoArticulo','$fechaSubido','$statusArt',$idUsuario,$categoria,$idMarca,'$precioArticulo')";
+        $cmd="INSERT INTO articulo(NombreArt,ReseñaArt,FotoArt,FechaSubido,StatusArt,id_Usuario,id_Categoria,id_Marca,CostoEnvio)Values('$nombreArticulo','$reseñaArtiulo','$fotoArticulo','$fechaSubido','$statusArt',$idUsuario,$categoria,$idMarca,'$precioArticulo')";
         if(!$conex->query($cmd))
         {
             print '<script languaje="JavaScript">alert("No se puede agregar el Producto");</script>';
@@ -47,7 +47,7 @@
         $precio=$objCombi->getPrecio();
         $stock=$objCombi->getStock();
         $idArticulo=$objCombi->getIdArticulo();
-        $comando="INSERT INTO Combinacion (precio, stock,id_Articulo) values('$precio','$stock','$idArticulo')";
+        $comando="INSERT INTO combinacion (precio, stock,id_Articulo) values('$precio','$stock','$idArticulo')";
         if(!$conex->query($comando))
         {
             print '<script languaje="JavaScript">alert("Error al agregar Cantidad y precio");</script>';
@@ -74,7 +74,7 @@
         $idUsu=$objcarac->getIdUsuario();
 
         $cmd="INSERT INTO artcarac(id_Carac,id_Articulo) values('$idCarac',$idArt)";
-        $cmd1="INSERT INTO Dominio(NombreDominio,id_Caracteristicas,id_UsuarioDomi)VALUES('$nomDomi','$idCarac',$idUsu)";
+        $cmd1="INSERT INTO dominio(NombreDominio,id_Caracteristicas,id_UsuarioDomi)VALUES('$nomDomi','$idCarac',$idUsu)";
 
         if(!$conex->query($cmd) || !$conex->query($cmd1))
         {
@@ -100,7 +100,7 @@
         $nombreFoto=$objGaleria->getNombreFoto();
         $idArt=$objGaleria->getIdArt();
 
-        $cmd="INSERT INTO Foto(Foto,id_Articulo) values ('$nombreFoto',$idArt)";
+        $cmd="INSERT INTO foto(Foto,id_Articulo) values ('$nombreFoto',$idArt)";
         if(!$conex->query($cmd))
         {
             print '<script languaje="JavaScript">alert("error al insertar foto");</script>';
@@ -125,7 +125,7 @@
         $conex=Conexion::conectar();
         $idArt=$objPublicar->getIdArt();
         $statusArt="Públicado";
-        $cmd="UPDATE Articulo set StatusArt='$statusArt' where id_Articulo=$idArt";
+        $cmd="UPDATE articulo set StatusArt='$statusArt' where id_Articulo=$idArt";
         
         if(!$conex->query($cmd))
         {
@@ -143,7 +143,7 @@
     
                 }).then((value)=>
                 {
-                    window.location.replace("ProductosPublicados.php");
+                    window.location.replace("MisProducto.php");
                 });
             
             </script>';

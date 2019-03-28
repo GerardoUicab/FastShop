@@ -1,13 +1,14 @@
+<?php  include 'headerCli.php'; ?>
 <?php 
- include 'headerCli.php';
  include '../DAO/DetalleCarritoDAO.php';
  $conex=Conexion::conectar();
 	$sel="SELECT * FROM carrusel";
 	$lis=$conex->prepare($sel);
 	$lis->execute();
 	$baner=$lis->fetchAll();
-	$cmdProducto="select a.id_Articulo, a.NombreArt,a.FotoArt,a.costoEnvio,u.nombre,u.fotoUsuario,c.precio,c.stock from 
-	articulo a,Combinacion c, Usuario u 
+	$cmdProducto="select a.id_Articulo, a.NombreArt,a.FotoArt,a.costoEnvio,u.nombre,u.fotoUsuario,c.precio,c.stock 
+	from 
+	articulo a,combinacion c, usuario u 
 	where a.id_Usuario=u.id_Usuario and c.id_Articulo=a.id_Articulo and a.StatusArt='Públicado' and c.stock !=0 order by a.id_Articulo desc";
 	$lisArti=$conex->prepare($cmdProducto);
 	$lisArti->execute();

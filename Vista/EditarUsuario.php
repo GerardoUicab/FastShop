@@ -1,8 +1,8 @@
+<?php include 'headerCli.php'; ?>
 <?php
-include 'headerCli.php';
 include '../DAO/UsuarioDAO.php';
 $conex = Conexion::conectar();
-$cmd = "select u.Nombre,u.Apellido,u.fotoUsuario,u.Contrasenia,u.Email,ti.Nombre as tipoUsuario from Usuario u, tipousuario ti where
+$cmd = "select u.Nombre,u.Apellido,u.fotoUsuario,u.Contrasenia,u.Email,ti.Nombre as tipoUsuario from usuario u, tipousuario ti where
 ti.id_TipoUsu=u.id_TipoUsu and id_Usuario='" . $_SESSION['ID'] . "'";
 $liscmd = $conex->prepare($cmd);
 $liscmd->execute();
@@ -137,7 +137,7 @@ foreach ($listaDirec as $datoDirec) {
 </style>
 <script>
     <?php if (isset($_SESSION["id_TipoUsu"]) == false) { ?>
-    window.location.replace("login.php");
+    window.location.replace("Login.php");
     <?php 
 }
 if (isset($_SESSION["id_TipoUsu"]) == true && $_SESSION["id_TipoUsu"] != 2) { ?>

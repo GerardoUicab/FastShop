@@ -1,5 +1,5 @@
-<?php 
-    include 'headerAdmin.php';
+<?php include 'headerAdmin.php'; ?>
+<?php
     include '../DAO/CarruselDAO.php';
 
     $conex=Conexion::Conectar();

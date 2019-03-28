@@ -1,14 +1,14 @@
+<?php include 'headerCli.php'; ?>
 <script src="../Recursos/js/sweetalert.min.js"></script>
 <?php 
-include 'headerCli.php';
 include '../DAO/DetalleCarritoDAO.php';
 $conex = Conexion::conectar();
 if (isset($_SESSION['ID']) == false) {
         echo '<script>window.location.replace("Login.php");</script>';
     }
 $idUsu = $_SESSION['ID'];
-$carrito = "select dc.id_DetaCarrito,dc.id_Articulo,dc.PiezasProduc,dc.PrecioProduc,dc.costoEnvioD,ar.NombreArt,ar.ReseñaArt,ar.FotoArt
-from detallecarrito dc, articulo ar where dc.id_Articulo=ar.id_Articulo  and StatusDetalleCarrito='No Pagado' and dc.id_Usuario=$idUsu";
+$carrito = "select dc.id_DetaCarrito,dc.id_Articulo,dc.PiezasProduc,dc.PrecioProduc,dc.costoEnvioD,ar.NombreArt,
+ar.ReseñaArt,ar.FotoArt from detallecarrito dc, articulo ar where dc.id_Articulo=ar.id_Articulo  and StatusDetalleCarrito='No Pagado' and dc.id_Usuario=$idUsu";
 $lisCarrito = $conex->prepare($carrito);
 $lisCarrito->execute();
 $listaCarrito = $lisCarrito->fetchAll();
@@ -88,7 +88,7 @@ $listaResumen = $lisResumen->fetchAll();
 </style>
 <script>
     <?php if (isset($_SESSION["id_TipoUsu"]) == false) { ?>
-    window.location.replace("login.php");
+    window.location.replace("Login.php");
     <?php 
 }
 if (isset($_SESSION["id_TipoUsu"]) == true && $_SESSION["id_TipoUsu"] != 2) { ?>

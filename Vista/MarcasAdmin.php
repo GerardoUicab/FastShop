@@ -1,8 +1,8 @@
-<?php 
-    include 'headerAdmin.php';
+<?php include 'headerAdmin.php'; ?>
+<?php
     include '../DAO/MarcaDAO.php';
     $conex=Conexion::conectar();
-    $cmd="SELECT * FROM Marca ORDER BY id_Marca desc";
+    $cmd="SELECT * FROM marca ORDER BY id_Marca desc";
     $lis=$conex->prepare($cmd);
     $lis->execute();
     $listado=$lis->fetchAll();

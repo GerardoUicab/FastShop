@@ -1,12 +1,13 @@
-<?php include 'headerAdmin.php';
+<?php include 'headerAdmin.php'; ?>
+<?php 
       include  '../DAO/CategoriaDAO.php';
 
       $con=Conexion::conectar();
-      $eje="SELECT * FROM Categoria";
+      $eje="SELECT * FROM categoria";
       $hola=$con->prepare($eje);
       $hola->execute();
       $lista=$hola->fetchAll();
-      $categoria="SELECT * FROM Categoria order by id_Categoria desc";
+      $categoria="SELECT * FROM categoria order by id_Categoria desc";
       $lisC=$con->prepare($categoria);
       $lisC->execute();
       $listaC=$lisC->fetchAll();

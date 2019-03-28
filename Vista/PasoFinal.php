@@ -1,5 +1,5 @@
+<?php include 'headerCli.php'; ?>
 <?php 
-include 'headerCli.php';
 include '../DAO/DetalleCarritoDAO.php';
 $conex=Conexion::conectar();
 $IDUS=$_SESSION['ID'];
@@ -15,7 +15,7 @@ foreach($listaResumen as $barrer)
 ?>
 <script>
     <?php if (isset($_SESSION["id_TipoUsu"]) == false) { ?>
-    window.location.replace("login.php");
+    window.location.replace("Login.php");
     <?php 
 }
 if (isset($_SESSION["id_TipoUsu"]) == true && $_SESSION["id_TipoUsu"] != 2) { ?>

@@ -1,18 +1,16 @@
-
+<?php include 'headerCli.php'; ?>
 <?php 
-    include 'headerCli.php';
-
     include '../DAO/ArticuloDAO.php';
     $conex=Conexion::conectar();
-    $Categoria="SELECT id_Categoria,NombreCategoria FROM Categoria";
+    $Categoria="SELECT id_Categoria,NombreCategoria FROM categoria";
     $lisCategoria=$conex->prepare($Categoria);
     $lisCategoria->execute();
     $ListaCategoria=$lisCategoria->fetchAll();
-    $Marca="SELECT id_Marca,NombreMarca from Marca";
+    $Marca="SELECT id_Marca,NombreMarca from marca";
     $lisMarca=$conex->prepare($Marca);
     $lisMarca->execute();
     $listaMarca=$lisMarca->fetchAll();
-    $Carac="SELECT * FROM Caracteristicas";
+    $Carac="SELECT * FROM caracteristicas";
     $lisCarac=$conex->prepare($Carac);
     $lisCarac->execute();
     $listaCarac=$lisCarac->fetchAll();

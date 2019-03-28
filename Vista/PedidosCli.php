@@ -1,12 +1,11 @@
+<?php include 'headerCli.php'; ?>
 <?php 
-
-include 'headerCli.php';
 $conex=Conexion::conectar();
 
 ?>
 <script>
     <?php if(isset($_SESSION["id_TipoUsu"])==false){ ?>
-        window.location.replace("login.php");
+        window.location.replace("Login.php");
     <?php }if(isset($_SESSION["id_TipoUsu"])==true && $_SESSION["id_TipoUsu"]!=2){?>
         window.location.replace("indexAdmin.php");
     <?php }?>

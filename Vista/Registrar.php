@@ -1,4 +1,5 @@
-<?php include 'headerCli.php';
+<?php include 'headerCli.php'; ?>
+<?php
 
 include '../DAO/UsuarioDAO.php';
 

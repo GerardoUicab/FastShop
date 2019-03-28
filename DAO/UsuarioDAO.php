@@ -50,7 +50,7 @@ class UsuarioDAO
         $conex = Conexion::conectar();
         $nombre = $objfoto->getFoto();
         $idUsuario = $objfoto->getId();
-        $comando = "update Usuario set fotoUsuario='$nombre' where id_Usuario=$idUsuario";
+        $comando = "update usuario set fotoUsuario='$nombre' where id_Usuario=$idUsuario";
         if (!$conex->query($comando)) {
 
                 echo '<script>swal("Advertencia", "No se pudo modificar su foto","warning");</script>';

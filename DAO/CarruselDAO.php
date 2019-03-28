@@ -16,7 +16,7 @@ class CarruselDAO
         $conex=Conexion::conectar();
         $nombreFoto=$objImagen->getNombreFoto();
 
-        $cmd="INSERT INTO Carrusel (NombreFoto) VALUES('$nombreFoto')";
+        $cmd="INSERT INTO carrusel (NombreFoto) VALUES('$nombreFoto')";
         if(!$conex->query($cmd))
         {
             print "erro al insertar";

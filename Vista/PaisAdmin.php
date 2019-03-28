@@ -1,4 +1,5 @@
-<?php include 'headerAdmin.php';
+<?php include 'headerAdmin.php'; ?>
+<?php 
  include '../DAO/PaisDAO.php';
 
  $con=Conexion::conectar();
