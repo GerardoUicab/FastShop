@@ -17,14 +17,15 @@
         
         $fotoArticulo=$objArticulo->getFotoArticulo();
         $nombreArticulo=$objArticulo->getNombreArticulo();
-        $reseñaArtiulo=$objArticulo->getReseñaArticulo();
+        $resenaArtiulo=$objArticulo->getReseñaArticulo();
         $precioArticulo=$objArticulo->getPrecio();
         $idMarca=$objArticulo->getIdmarca();
         $categoria=$objArticulo->getCategoria();
         $fechaSubido=$objArticulo->getFechaSubido();
         $idUsuario=$objArticulo->getIdUsuario();
         $statusArt="No Públicado";
-        $cmd="INSERT INTO articulo(NombreArt,ReseñaArt,FotoArt,FechaSubido,StatusArt,id_Usuario,id_Categoria,id_Marca,CostoEnvio)Values('$nombreArticulo','$reseñaArtiulo','$fotoArticulo','$fechaSubido','$statusArt',$idUsuario,$categoria,$idMarca,'$precioArticulo')";
+        $cmd="INSERT INTO articulo(NombreArt,ReseñaArt,FotoArt,StatusArt,id_Usuario,id_Categoria,id_Marca,CostoEnvio)Values
+        ('$nombreArticulo','$resenaArtiulo','$fotoArticulo','$statusArt',$idUsuario,$categoria,$idMarca,'$precioArticulo')";
         if(!$conex->query($cmd))
         {
             print '<script languaje="JavaScript">alert("No se puede agregar el Producto");</script>';

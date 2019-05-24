@@ -19,7 +19,7 @@
  ?>
 <script>
     <?php if(isset($_SESSION["id_TipoUsu"])==false){ ?>
-        window.location.replace("login.php");
+        window.location.replace("Login.php");
     <?php }if(isset($_SESSION["id_TipoUsu"])==true && $_SESSION["id_TipoUsu"]!=2){?>
         window.location.replace("IndexAdmin.php");
     <?php }?>
@@ -319,7 +319,7 @@ document.getElementById("btnGaleria").disabled = false;
      $combinacion=new CombinacionBO();
      $combinacion->setPrecio($_REQUEST['txtPrecioProducto']);
      $combinacion->setStock($_REQUEST['txtCantidad']);
-     $consulta="SELECT max(id_Articulo) from Articulo where id_Usuario='".$_SESSION['ID']."'";
+     $consulta="SELECT max(id_Articulo) from articulo where id_Usuario='".$_SESSION['ID']."'";
      $listaConsulta=$conex->prepare($consulta);
      $listaConsulta->execute();
      $lisConsulta=$listaConsulta->fetchAll();
@@ -340,7 +340,7 @@ document.getElementById("btnGaleria").disabled = false;
      $caract=new CaracArticuloBO();
      $caract->setIdCarac($_REQUEST['cmbCarac']);
      $caract->setNombreDominio($_REQUEST['txtNombreDominio']);
-     $consulta="SELECT max(id_Articulo) from Articulo where id_Usuario='".$_SESSION['ID']."'";
+     $consulta="SELECT max(id_Articulo) from articulo where id_Usuario='".$_SESSION['ID']."'";
      $listaIdArt=$conex->prepare($consulta);
      $listaIdArt->execute();
      $lisArti=$listaIdArt->fetchAll();
@@ -367,7 +367,7 @@ function Galeria()
         }
         $galeria->setNombreFoto($archivo);
 
-    $consulta="SELECT max(id_Articulo) from Articulo where id_Usuario='".$_SESSION['ID']."'";
+    $consulta="SELECT max(id_Articulo) from articulo where id_Usuario='".$_SESSION['ID']."'";
      $listaIdArt=$conex->prepare($consulta);
      $listaIdArt->execute();
      $lisArti=$listaIdArt->fetchAll();

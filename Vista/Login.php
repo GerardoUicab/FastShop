@@ -58,7 +58,7 @@ if(isset($_POST['btnIniciar']))
     
     <?php }?>
     <?php if($_SESSION["id_TipoUsu"]==1) {?>
-        window.location.replace("indexAdmin.php");
+        window.location.replace("IndexAdmin.php");
     <?php }?>
     </script>
 <div class="container">

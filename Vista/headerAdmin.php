@@ -29,7 +29,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <?php 
 }
 if (isset($_SESSION["id_TipoUsu"]) == true && $_SESSION["id_TipoUsu"] != 3) { ?>
-    window.location.replace("IndexAdmin.php");
+    window.location.replace("indexCliAdmin.php");
     <?php 
 } ?>
 </script>
