@@ -1,6 +1,7 @@
 <?php include 'headerCli.php'; ?>
 <?php
 
+print("Que onda man");
 
 if(isset($_POST['btnIniciar']))
 {
